@@ -1,0 +1,197 @@
+/* Contenedor principal */
+.citas-page {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #FEFCFB;
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .citas-page h1 {
+    text-align: center;
+    color: #251c05;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* Grid responsivo */
+  .citas-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 600px) {
+    .citas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Tarjeta de cita */
+  .cita-card {
+    background: #fff;
+    border-radius: 1rem;
+    border-left: 6px solid #251c05;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cita-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+  
+  /* Cabecera de tarjeta */
+  .cita-card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .cita-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #251c05;
+  }
+  
+  .cita-date {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+  }
+  
+  /* Detalles con definición */
+  .cita-details {
+    display: grid;
+    row-gap: 0.5rem;
+    column-gap: 1rem;
+    grid-template-columns: auto 1fr;
+    flex-grow: 1;
+  }
+  
+  .cita-details dt {
+    font-weight: 600;
+    color: #455400;
+  }
+  
+  .cita-details dd {
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Acciones de la cita */
+  .cita-actions {
+    margin-top: 1rem;
+    text-align: right;
+  }
+  
+  .btn-cancel {
+    background-color: #D64545;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #B03A3A;
+  }
+
+  .citas-footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3A3831;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-top: 2rem;
+    border-top: 3px solid #B86F52;
+  }
+  
+
+  /* Estados de la vista */
+  .status {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 3rem;
+  }
+  
+  .status.loading { color: #555; }
+  .status.info    { color: #555; }
+  .status.error   { color: #D64545; }
+  
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: rgb(255, 255, 255);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+    color: #3A3831;
+  }
+  
+  .modal p {
+    margin: 1rem 0;
+    color: #555;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+  }
+  
+  .btn-confirm {
+    background-color: #960c0c;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-close {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-cancel {
+    margin-top: 1rem;
+    background-color: #960c0c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  

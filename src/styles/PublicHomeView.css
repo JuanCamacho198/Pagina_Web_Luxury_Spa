@@ -1,0 +1,105 @@
+/* src/styles/PublicHomeView.css */
+
+.public-home {
+    background-color: #dac794;
+    min-height: 100vh;
+  }
+  
+  /* ===== Banner ===== */
+  .banner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+  }
+  
+  .banner-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #3A3831;
+  }
+  
+  .banner-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #3A3831;
+  }
+  
+  .banner-content p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #3A3831;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .btn-primary {
+    background-color: #3A3831;
+    color: #F5E8D0;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2E2C28;
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    color: #3A3831;
+    border: 2px solid #3A3831;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #3A3831;
+    color: #F5E8D0;
+  }
+  
+  .banner-image img {
+    width: 100%;
+    height: auto;
+    /* redondeamos solo la parte izquierda del banner */
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    /* un ligero redondeo en las otras esquinas */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  /* ===== Info Cards ===== */
+  .info-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .caja {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .caja img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+  
+  .caja h3 {
+    font-size: 1.25rem;
+    color: #3A3831;
+  }
+  

@@ -1,0 +1,217 @@
+.navbar {
+  background-color: #251c05;
+  color: white;
+  padding: 15px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* Sección izquierda del navbar */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo del logo/texto del logo */
+.nav-logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #dac794; /* Color claro para el texto del logo */
+  /* Propiedades para la imagen de fondo del logo */
+  background: url('../assets/logo2.png') no-repeat left center;
+  background-size: 54px 54px;
+  padding-left: 60px; /* Espacio a la izquierda para el ícono */
+}
+
+/* Sección central del navbar (enlaces de navegación) */
+.nav-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* Espacio entre los enlaces */
+}
+
+/* Estilo general de los enlaces de navegación */
+.nav-link {
+  text-decoration: none;
+  color: #dac794; /* Color blanco por defecto */
+  font-size: 16px;
+  font-weight: 500;
+  position: relative; /* Necesario para la pseudo-clase ::after */
+  padding: 5px 0; /* Padding vertical para el hover effect */
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+/* Pseudo-clase para la línea inferior en hover */
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0; /* Ancho inicial cero */
+  height: 2px;
+  background: #F5E8D0; /* Color de la línea */
+  transition: width 0.3s; /* Transición suave para el ancho */
+}
+.nav-link:hover {
+  color: #F5E8D0; /* Color al pasar el mouse */
+}
+.nav-link:hover::after {
+  width: 100%; /* El ancho se expande al 100% en hover */
+}
+
+/* Sección derecha del navbar (botones e iconos) */
+.nav-right {
+  display: flex; /* Usamos flexbox */
+  justify-content: flex-end; /* Alinea elementos a la derecha */
+  align-items: center; /* Alinea elementos verticalmente al centro */
+  gap: 12px; /* Espacio entre elementos (carrito, settings, etc.) */
+  /* Asegúrate de que este contenedor NO tenga position: relative si quieres que el settings-menu se posicione relativo al navbar padre */
+  /* Si el settings-menu se posiciona relativo al .nav-right, entonces .nav-right sí necesitaría position: relative; */
+}
+
+/* Botones públicos (login / register) */
+.nav-btn {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: background 0.3s, color 0.3s;
+  display: inline-block; /* Asegura que padding y margin funcionen correctamente */
+}
+.nav-btn-login {
+  border: 1px solid #dac794;
+  color: #dac794;
+  background: transparent;
+}
+.nav-btn-login:hover {
+  background: #dac794;
+  color: #3A3831;
+}
+.nav-btn-register {
+  background: #dac794;
+  color: #3A3831;
+}
+.nav-btn-register:hover {
+  background: #251c05;
+  color: #dac794;
+  border: 1px solid #dac794; /* Añade un borde en hover si el color de fondo cambia */
+}
+
+/* --- NUEVOS Estilos para el Ícono del Carrito y el Contador --- */
+
+/* Contenedor/Botón del ícono del carrito */
+.cart-icon-button {
+  position: relative; /* <-- ¡FUNDAMENTAL! Posiciona el badge absoluto relativo a este botón */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px; /* Área clickeable */
+  font-size: 1.6rem; /* Tamaño del ícono (ajusta si usas un SVG o librería) */
+  color: #33d60b; /* Color del ícono del carrito */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.cart-icon-button:hover {
+  color: #F5E8D0; /* Color al pasar el mouse */
+}
+
+/* El Badge (el círculo rojo con el número) */
+.cart-count-badge {
+  position: absolute; /* Posicionamiento absoluto relativo al padre con position: relative */
+
+  /* --- AJUSTA ESTOS VALORES con el nuevo ícono --- */
+  /* top: un valor negativo lo sube */
+  /* right: un valor negativo lo mueve hacia la izquierda desde el borde derecho del padre */
+  /* Prueba diferentes valores hasta que se vea bien sobre el nuevo ícono */
+  top: -8px; /* <-- Ajusta este valor */
+  right: -8px; /* <-- Ajusta este valor */
+
+
+  /* --- Tamaño y Forma del Círculo (probablemente no necesite cambio si 18px funciona con el nuevo ícono) --- */
+  border-radius: 80%;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+
+  /* --- Estilo y Número --- */
+  background-color: #ff0000;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  /* --- Centra el número --- */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  /* --- Sombra --- */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+
+  z-index: 1; /* Asegura que esté visible sobre el ícono */
+}
+
+/* --- Fin de los Estilos del Carrito --- */
+
+
+/* Settings menu (privado) - Botón de configuración */
+.settings-btn {
+  background: none;
+  border: none;
+  color: white; /* Color del ícono de configuración */
+  cursor: pointer;
+  padding: 5px; /* Padding similar al botón del carrito para alinear */
+  transition: color 0.3s ease;
+  display: flex; /* Para centrar el ícono si es necesario */
+  align-items: center;
+  justify-content: center;
+}
+.settings-btn:hover {
+  color: #F5E8D0; /* Color al pasar el mouse */
+}
+
+
+/* Menú desplegable del perfil */
+.settings-menu {
+  position: absolute;
+  /* Posicionar relativo al navbar padre */
+  top: 55px; /* Ajusta esta distancia desde la parte superior del navbar */
+  right: 40px; /* Ajusta esta distancia desde el borde derecho del navbar */
+
+  background: white;
+  color: #392A16; /* Color del texto dentro del menú */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 100; /* Z-index alto para estar encima de otros elementos */
+}
+/* Ajusta la posición si tu .nav-right tiene position: relative; */
+/* En ese caso, right: 0; lo alinearía con el borde derecho del .nav-right */
+
+
+.settings-menu a,
+.settings-menu button {
+  padding: 12px 18px;
+  background: white;
+  border: none;
+  text-decoration: none;
+  color: #392A16;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.settings-menu a:hover,
+.settings-menu button:hover {
+  background-color: #F5E8D0; /* Color de fondo al pasar el mouse */
+}

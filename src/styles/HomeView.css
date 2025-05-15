@@ -1,0 +1,123 @@
+/* src/styles/HomeView.css */
+
+.home-container {
+  background-color: #F5E8D0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+}
+
+.logout-btn:hover {
+  background-color: #392A16;
+}
+
+/* HERO SECTION */
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 8%;
+  background-color: #dac794;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  color: #231C07;
+}
+
+.hero-text h2 {
+  font-size: 1.8rem;
+  color: #392A16;
+  margin-top: 1rem;
+}
+
+.hero-text p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #634133;
+}
+
+.hero-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.primary-btn {
+  background-color: #392A16;
+  color: #FEFCFB;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  border: 2px solid #392A16;
+  color: #392A16;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  background-color: #392A16;
+  color: #FEFCFB;
+  border: none;
+}
+
+/* HERO IMAGE */
+.hero-image {
+  width: 600px;
+  height: 320px;
+  background-image: url('../assets/bannerSpa.avif'); /* <== Cambia por tu imagen real */
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+}
+
+/* INFO SECTION */
+.info-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #FFF8F0;
+}
+
+.info-section h3 {
+  color: #392A16;
+  font-size: 2rem;
+}
+
+.info-section p {
+  color: #634133;
+  margin-top: 1rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #3E3C36;
+  color: #FEFCFB;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: auto;
+}

@@ -1,0 +1,92 @@
+/* src/styles/footer.css */
+
+footer {
+  background-color: var(--color-text-primary); /* Usando la variable de color */
+  color: var(--color-secondary); /* Usando la variable de color */
+  padding: 40px 20px;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section h4 {
+  color: var(--color-accent); /* Usando la variable de color */
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.footer-section p {
+  margin-bottom: 10px;
+}
+
+.footer-section a {
+  color: var(--color-secondary); /* Usando la variable de color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--color-accent); /* Usando la variable de color */
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.social-media {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-media a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.social-media a:hover {
+  transform: scale(1.1);
+}
+
+.social-media img {
+  width: 30px; /* Reduce el tamaño de los iconos */
+  height: auto;
+}
+
+footer > p {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #555; /* Puedes usar una variable si lo prefieres */
+  color: var(--color-secondary); /* Usando la variable de color */
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr; /* Apila las secciones en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 30px;
+  }
+
+  .social-media {
+    justify-content: center; /* Centra los iconos en pantallas pequeñas */
+  }
+}

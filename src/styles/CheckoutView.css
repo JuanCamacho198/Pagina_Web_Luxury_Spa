@@ -1,0 +1,259 @@
+/* src/styles/CheckoutView.css */
+
+.checkout-page {
+    padding: 2rem; /* Padding interior del contenedor principal */
+    background: #ffffff; /* Fondo principal (un poco más oscuro que en la imagen, ajusta si quieres) */
+    max-width: 1200px; /* Aumenta el ancho máximo para acomodar dos columnas */
+    margin: 2rem auto; /* Centra la página con margen arriba y abajo */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* text-align: center; /* Ya no centramos el texto general */
+}
+
+.checkout-page h1 {
+    text-align: center;
+    color: #3A3831;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+/* --- Estilos para el CONTENEDOR de las dos columnas --- */
+.checkout-content {
+    display: flex; /* Habilita Flexbox */
+    gap: 2rem; /* Espacio entre las dos columnas */
+    flex-wrap: wrap; /* Permite que las columnas se apilen en pantallas pequeñas */
+    align-items: flex-start; /* Alinea las columnas arriba */
+}
+
+
+/* --- Estilos para la columna de RESUMEN --- */
+.checkout-summary {
+    background-color: #FFF; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 8px;
+    /* margin-bottom: 2rem; /* Eliminado, el gap del flexbox maneja el espacio */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+
+    flex: 1; /* Permite que esta columna crezca */
+    min-width: 480px; /* Ancho mínimo para que no se vuelva demasiado estrecha */
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
+
+    border: 1px solid #eee; /* Borde sutil como en la imagen */
+    /* border-left: 5px solid #3A3831; /* Eliminado el borde grueso decorativo */
+}
+
+.checkout-summary h2 {
+    font-size: 1.5rem;
+    color: #3A3831;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #eee; /* Línea separadora del título */
+    padding-bottom: 0.5rem;
+     text-align: left; /* Asegura que el título esté a la izquierda */
+}
+
+/* Estilo para cada ítem dentro del resumen */
+.checkout-summary .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee; /* Línea punteada entre ítems */
+     font-size: 1rem; /* Tamaño base para el texto del ítem */
+     color: #555;
+}
+.checkout-summary .summary-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.checkout-summary .summary-item img {
+    width: 50px; /* Ajusta el tamaño de la imagen del ítem */
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Estilo para el nombre del ítem */
+.checkout-summary .summary-item span:first-of-type {
+     flex-grow: 1;
+     /* font-weight: bold; /* Puedes hacer el nombre en negrita si quieres */
+     color: #333; /* Color más oscuro para el nombre */
+}
+
+/* Estilo para el precio del ítem */
+.checkout-summary .summary-item span:last-child {
+    flex-grow: 0;
+    font-weight: bold; /* Precio en negrita */
+    color: #3A3831; /* Color principal para el precio */
+}
+
+/* Estilo para la línea del total en el resumen */
+.checkout-summary .total-row { /* Añade una clase a este div en tu JSX si quieres estilizarlo así */
+    border-top: 1px solid #eee;
+    margin-top: 15px; /* Más espacio arriba del total */
+    padding-top: 15px;
+    font-weight: bold;
+    color: #3A3831; /* Color para el total */
+    display: flex; /* Flexbox para alinear "Total" y el valor */
+    justify-content: space-between;
+    font-size: 1.1rem; /* Tamaño de fuente para el total */
+}
+/* Si no añades la clase .total-row, este estilo se aplicará a tu div con el estilo inline */
+
+
+/* --- Estilos para la columna del FORMULARIO --- */
+.scheduling-form {
+     background-color: #FFF; /* Fondo blanco */
+     padding: 1.5rem;
+     border-radius: 8px;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+
+     flex: 2; /* Permite que esta columna crezca más (el doble que el resumen) */
+     min-width: 350px; /* Ancho mínimo para el formulario */
+     box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
+     border: 1px solid #eee; /* Borde sutil */
+}
+
+.scheduling-form h2 {
+    color: #3A3831;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Estilos para GRUPOS DE CAMPOS en el formulario (ej: Email/Teléfono, Fecha/Hora) */
+/* Envuelve los pares de campos en un div con esta clase si quieres ponerlos lado a lado */
+.form-row {
+    display: flex; /* Habilita Flexbox */
+    gap: 1rem; /* Espacio entre los campos lado a lado */
+    margin-bottom: 1rem; /* Espacio debajo de la fila */
+    flex-wrap: wrap; /* Permite que los campos se apilen en pantallas pequeñas */
+}
+/* Aplica display: flex y gap a los divs que contienen campos lado a lado */
+
+/* Ajusta el form-group general para los campos que están solos */
+.form-group {
+    margin-bottom: 1rem; /* Espacio debajo de cada grupo */
+    flex: 1; /* Permite que los grupos dentro de .form-row se expandan */
+    min-width: 150px; /* Ancho mínimo para los campos lado a lado */
+    box-sizing: border-box;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #3A3831;
+    font-size: 1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group textarea { /* Añade textarea si tienes campo de notas */
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+.form-group textarea {
+     min-height: 100px; /* Altura mínima para el campo de notas */
+     resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #3A3831;
+    outline: none;
+}
+
+/* Estilo del botón de Envío (Agendar y Proceder al Pago) */
+.scheduling-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px; /* Bordes muy redondeados como en la imagen */
+    color: #F5E8D0; /* Color claro para el texto */
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Transición de opacidad en hover */
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra */
+}
+
+.scheduling-form button[type="submit"]:hover:not(:disabled) {
+    opacity: 0.9; /* Ligeramente transparente en hover */
+}
+.scheduling-form button[type="submit"]:disabled {
+    opacity: 0.5; /* Menos opacidad si está deshabilitado */
+    cursor: not-allowed;
+}
+
+
+.error {
+    color: #c0392b;
+    background-color: #fadde1;
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+.loading, .info {
+    text-align: center;
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilo para el texto informativo debajo del resumen */
+.checkout-summary p.info-text { /* Añade una clase a este p en tu JSX */
+     font-size: 0.9rem;
+     color: #666;
+     margin-top: 1.5rem;
+     padding-top: 1.5rem;
+     border-top: 1px dashed #eee; /* Línea separadora */
+     text-align: center;
+     line-height: 1.4;
+}
+
+
+/* --- Ajuste para pantallas pequeñas: apilar columnas --- */
+@media (max-width: 768px) { /* Ajusta el breakpoint según necesites */
+    .checkout-content {
+        flex-direction: column; /* Apila las columnas en pantallas pequeñas */
+        gap: 1.5rem; /* Espacio entre las secciones apiladas */
+    }
+
+    .checkout-summary,
+    .scheduling-form {
+        flex: none; /* Desactiva el flex-grow */
+        width: 100%; /* Ocupa todo el ancho */
+        min-width: auto; /* Desactiva el ancho mínimo */
+    }
+
+    /* Si usaste .form-row para campos lado a lado, apilarlos también en móvil */
+     .form-row {
+         flex-direction: column;
+         gap: 0.5rem;
+     }
+      .form-group {
+          flex: none;
+          width: 100%;
+          min-width: auto;
+      }
+}

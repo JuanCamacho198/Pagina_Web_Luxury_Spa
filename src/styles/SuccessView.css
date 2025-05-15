@@ -1,0 +1,36 @@
+.success-page {
+    padding: 3rem;
+    background: #e9f7ef;
+    max-width: 600px;
+    margin: 4rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 2px solid #8bc34a;
+    color: #155724;
+}
+
+.success-page h1 {
+    color: #2e7d32;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.success-page p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.success-page a {
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.success-page a:hover {
+    text-decoration: underline;
+}
