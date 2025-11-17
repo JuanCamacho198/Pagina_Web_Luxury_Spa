@@ -1,13 +1,13 @@
 // src/views/components/CartView.jsx
 import React, { useState, useEffect } from 'react'; 
-import { useCart } from './CartContext';
+import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../firebase/firebaseConfig'; 
 import { collection, getDocs } from 'firebase/firestore';
 import '../../styles/CartView.css';
 
 export default function CartView() {
-  const { removeItem, clearCart, cartCount } = useCart();
+  const { removeItem, clearCart } = useCart();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [removing, setRemoving] = useState(null); // Para mostrar estado de eliminación
@@ -44,7 +44,7 @@ export default function CartView() {
     };
 
     fetchCartItems();
-  }, [auth.currentUser]);
+  }, []);
 
   const total = cartItems.reduce((sum, item) => sum + parseFloat(item.Precio || 0), 0);
   const itemCount = cartItems.length;

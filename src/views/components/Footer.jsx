@@ -1,5 +1,5 @@
 // src/views/components/Footer.jsx
-import React from 'react';
+
 import logo from '../../assets/logo2.png';
 import { Link } from 'react-router-dom';
 import '../../styles/footer.css'; 

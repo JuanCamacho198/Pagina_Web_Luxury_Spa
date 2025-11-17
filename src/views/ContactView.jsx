@@ -1,5 +1,5 @@
 // src/views/ContactView.jsx
-import React from 'react';
+
 import Footer from '../views/components/Footer';
 import '../styles/ContactView.css';
 

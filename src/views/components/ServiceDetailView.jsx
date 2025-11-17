@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, addDoc, getDocs } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebaseConfig';
-import { useCart } from '../components/CartContext';
+import { useCart } from '../../context/CartContext';
 import '../../styles/ServiceDetailView.css';
 
 const ServiceDetailView = () => {

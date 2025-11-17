@@ -1,5 +1,5 @@
 // src/views/PaymentView.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/PaymentView.css';
 import PaymentSuccessModal from '../views/components/PaymentSuccessModal'; // Importa el modal

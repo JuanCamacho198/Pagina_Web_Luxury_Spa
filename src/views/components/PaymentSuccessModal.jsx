@@ -1,5 +1,5 @@
 // src/components/PaymentSuccessModal.jsx
-import React from 'react';
+
 import '../../styles/PaymentSuccessModal.css'; // Crea este archivo CSS
 
 export default function PaymentSuccessModal({ show, onClose, totalAmount }) {

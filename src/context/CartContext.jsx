@@ -9,8 +9,8 @@ export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
 
-  const auth = getAuth(); // Definir una sola vez
-  const db = getFirestore(); 
+  const auth = getAuth();
+  const db = getFirestore();
 
   const loadCartFromFirestore = async () => {
     try {
@@ -20,7 +20,6 @@ export function CartProvider({ children }) {
         console.warn("Usuario no autenticado.");
         return;
       }
-      //subcoleccion Carrito dentro de Usuarios
       const userCartRef = collection(db, 'Usuarios', user.uid, 'Carrito');
       const snapshot = await getDocs(userCartRef);
 
@@ -32,31 +31,31 @@ export function CartProvider({ children }) {
       console.error("Error al cargar el carrito desde Firestore:", error);
     }
   };
-  //limpiar el Carrito
+
   const clearCart = async () => {
     const user = auth.currentUser;
     if (!user) {
       console.warn("Usuario no autenticado.");
       return;
     }
-    
+
     const userCartRef = collection(db, "Usuarios", user.uid, "Carrito");
-    
+
     try {
       const snapshot = await getDocs(userCartRef);
       const batchDeletes = snapshot.docs.map((docSnapshot) =>
         deleteDoc(doc(db, "Usuarios", user.uid, "Carrito", docSnapshot.id))
       );
-      
+
       await Promise.all(batchDeletes);
-      
+
       setCartItems([]);
       setCartCount(0);
     } catch (error) {
       console.error("Error al vaciar el carrito:", error);
     }
   };
-  //quitar servicio del carrito
+
   const removeItem = async (itemId) => {
     try {
       const user = auth.currentUser;
@@ -86,3 +85,4 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
+

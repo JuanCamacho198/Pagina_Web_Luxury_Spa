@@ -7,7 +7,7 @@ import {
   useNavigate
 } from 'react-router-dom';
 import { auth } from './firebase/firebaseConfig';
-import { CartProvider } from './views/components/CartContext';
+import { CartProvider } from './context/CartContext';
 import NavBar                   from './views/components/NavBar';
 import ProfileView              from './views/components/ProfileView';
 import ServiceDetailView from './views/components/ServiceDetailView'; 

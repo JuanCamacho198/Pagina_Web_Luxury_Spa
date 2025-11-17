@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/SuccessView.css';
 import { FaCheckCircle } from 'react-icons/fa'; // Importa un icono de "check"

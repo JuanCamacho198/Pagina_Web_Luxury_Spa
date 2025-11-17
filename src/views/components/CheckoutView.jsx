@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchServiceById } from '../../models/servicesModel';
 import { addAppointment } from '../../models/citasModel';
-import { useCart } from '../components/CartContext';
+import { useCart } from '../../context/CartContext';
 import { useMemo } from 'react';
 import '../../styles/CheckoutView.css';
 import TimePicker from './TimePicker';
@@ -36,7 +36,7 @@ export default function CheckoutView() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { cartItems, clearCart, cartCount, loadCartFromFirestore  } = useCart();
+  const { cartItems, clearCart, loadCartFromFirestore  } = useCart();
   const serviceIdFromUrl = new URLSearchParams(location.search).get('serviceId');
 
   // Agrupa items con cantidad para resumen pedido

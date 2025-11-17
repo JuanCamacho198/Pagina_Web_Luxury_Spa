@@ -1,5 +1,5 @@
 // src/views/AboutView.jsx
-import React from 'react';
+
 import './../styles/AboutView.css';
 //sobre nosotros
 export default function AboutView() {

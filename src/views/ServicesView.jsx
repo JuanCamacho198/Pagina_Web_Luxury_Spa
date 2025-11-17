@@ -1,5 +1,5 @@
 // src/views/ServicesView.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllServices } from '../controllers/servicesController';
 import Footer from './components/Footer';
