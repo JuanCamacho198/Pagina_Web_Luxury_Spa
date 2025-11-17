@@ -1,4 +1,7 @@
+// src/models/citasModel.js
 import { db } from '../firebase/firebaseConfig';
+import { where } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth'; 
 import {
   collection,
   addDoc,
@@ -13,10 +16,20 @@ const CITAS_COLL = 'Citas';
 
 export async function addAppointment(appointmentData) {
   try {
-    const docRef = await addDoc(collection(db, CITAS_COLL), {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("Usuario no autenticado.");
+    }
+
+    const dataToSave = {
       ...appointmentData,
-      createdAt: new Date()
-    });
+      uid: user.uid, // guardar el UID del usuario actual
+      createdAt: appointmentData.createdAt || new Date()
+    };
+
+    const docRef = await addDoc(collection(db, CITAS_COLL), dataToSave);
     return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -24,9 +37,15 @@ export async function addAppointment(appointmentData) {
   }
 }
 
-export async function fetchAppointments() {
+
+//obtener cita por Id
+export async function fetchAppointments(uid) {
   try {
-    const q = query(collection(db, CITAS_COLL), orderBy('createdAt', 'desc'));
+    const q = query(
+      collection(db, 'Citas'),
+      where('uid', '==', uid),              
+      orderBy('createdAt', 'desc')          
+    );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -38,7 +57,7 @@ export async function fetchAppointments() {
   }
 }
 
-// Nueva función para borrar una cita por su ID
+// borrar una cita por su ID
 export async function deleteAppointment(id) {
   try {
     await deleteDoc(doc(db, CITAS_COLL, id));

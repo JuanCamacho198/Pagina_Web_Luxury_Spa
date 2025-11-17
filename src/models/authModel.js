@@ -1,3 +1,4 @@
+// src/models/authModel.js
 import { auth } from "../firebase/firebaseConfig";
 import {
   createUserWithEmailAndPassword,

@@ -44,7 +44,7 @@ import {
       await user.delete();
       console.log("[userController] Auth user deleted");
   
-      // ¡YA NO hacemos signOut() aquí!  
+      //NO se hace signOut() aqui
       onSuccess();    
     } catch (err) {
       console.error("[userController] deleteCurrentUser error:", err);

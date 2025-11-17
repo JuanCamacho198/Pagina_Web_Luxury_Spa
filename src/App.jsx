@@ -8,31 +8,39 @@ import {
 } from 'react-router-dom';
 import { auth } from './firebase/firebaseConfig';
 import { CartProvider } from './views/components/CartContext';
-import NavBar             from './views/components/NavBar';
-import ProfileView      from './views/components/ProfileView';
+import NavBar                   from './views/components/NavBar';
+import ProfileView              from './views/components/ProfileView';
+import ServiceDetailView from './views/components/ServiceDetailView'; 
 
 // Vistas principales
-import PublicHomeView   from './views/PublicHomeView';
-import LoginView          from './views/LoginView';
-import RegisterView     from './views/RegisterView';
-import HomeView           from './views/HomeView';
+import PublicHomeView           from './views/PublicHomeView';
+import LoginView                from './views/LoginView';
+import RegisterView             from './views/RegisterView';
+import HomeView                 from './views/HomeView';
+
+import PoliticasCancelacionView from './views/CancellationPolicyView';
+import DataPrivacyPolicyView from './views/DataPrivacyPolicyView';
+import ImportantReservationInfoView from './views/ImportantReservationInfoView';
+import FaqView from './views/FaqView';
+
 import ServicesView from './views/ServicesView';
 import CheckoutView from './views/components/CheckoutView';
 import CitasView from './views/CitasView';
 import PaymentView from './views/PaymentView';
 import SuccessView from './views/components/SuccessView';
 import CartView from './views/components/CartView';
+
 import ContactView from './views/ContactView';
 import AboutView from './views/AboutView';
 
 // --- Importa los controladores ---
-import { loginUsuario, registroUsuario } from './controllers/authController'; // Asegúrate que esta ruta e importaciones sean correctas
+import { loginUsuario, registroUsuario } from './controllers/authController';
 
 export default function App() {
-  // Estado para saber si ya se verificó el estado de autenticación inicial
+  //saber si ya se verificó el estado de autenticación 
   const [userChecked, setUserChecked] = useState(false);
-  // Estado para almacenar la información del usuario autenticado
-  const [user, setUser]              = useState(null);
+  // usuario autenticado
+  const [user, setUser] = useState(null);
 
   // Efecto para suscribirse a los cambios en el estado de autenticación de Firebase
   useEffect(() => {
@@ -50,16 +58,13 @@ export default function App() {
     return <div>Cargando…</div>;
   }
   return (
-
-    // Envolvemos toda la aplicación con CartProvider para que cualquier componente pueda usar useCart
-
+    // se envolvio toda la aplicación con CartProvider para que cualquier componente pueda usar useCart
     <CartProvider>
       <Router>
         <NavBar user={user} />
-
         {/* rutas de la aplicación */}
         <Routes>
-          {/* Bloque de rutas para usuarios NO autenticados (user es null) */}
+          {/* rutas para usuarios NO autenticados (user es null) */}
           {!user ? (
             <>
               {/* RUTAS PÚBLICAS */}
@@ -69,8 +74,11 @@ export default function App() {
               <Route path="/services" element={<ServicesView />} />
               <Route path="/contact" element={<ContactView />} />
               <Route path="/sobre-nosotros" element={<AboutView />} />
-
-
+              <Route path="/politicas-cancelacion" element={<PoliticasCancelacionView />} />
+              <Route path="/politica-datos" element={<DataPrivacyPolicyView />} />
+              <Route path="/informacion-reserva" element={<ImportantReservationInfoView />} />
+              <Route path="/preguntas-frecuentes" element={<FaqView />} />
+              
 
               {/* Redirecciona las rutas privadas si el usuario no está autenticado */}
               {/* Si intenta acceder a checkout, citas, pago, confirmación o carrito, lo mandamos al login */}
@@ -79,8 +87,7 @@ export default function App() {
               <Route path="/pago" element={<Navigate to="/login" replace />} />
               <Route path="/confirmacion-pago" element={<Navigate to="/login" replace />} />
               <Route path="/carrito" element={<Navigate to="/login" replace />} />
-
-
+              
               {/* Cualquier otra ruta no definida en este bloque para no autenticados ➔ redirige a la landing page */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </>
@@ -103,17 +110,23 @@ export default function App() {
               <Route path="/pago" element={<PaymentView />} />
               <Route path="/confirmacion-pago" element={<SuccessView />} />
               <Route path="/carrito" element={<CartView />} />
-
+              <Route path="/politicas-cancelacion" element={<PoliticasCancelacionView />} />
+              <Route path="/politica-datos" element={<DataPrivacyPolicyView />} />
+              <Route path="/informacion-reserva" element={<ImportantReservationInfoView />} />
+              <Route path="/preguntas-frecuentes" element={<FaqView />} />
 
               {/* Cualquier otra ruta no definida en este bloque para autenticados ➔ redirige a /home */}
               <Route path="*" element={<Navigate to="/home" replace />} />
+              
             </>
           )}
-        </Routes> {/* <-- Cierre de Routes */}
+          {/* Esta ruta debe estar fuera del bloque condicional de autenticación */}
+          <Route path="/servicio/:id" element={<ServiceDetailView />} />
+        </Routes> 
       </Router> {/* <-- Cierre de Router */}
     </CartProvider>
-  ); // <-- Cierre del return de App
-} // <-- Cierre de la función App
+  ); 
+} // <-- Cierre de App
 
 
 /**

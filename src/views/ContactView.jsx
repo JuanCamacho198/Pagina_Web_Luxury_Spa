@@ -1,17 +1,24 @@
+// src/views/ContactView.jsx
 import React from 'react';
+import Footer from '../views/components/Footer';
 import '../styles/ContactView.css';
 
 export default function ContactView() {
   return (
+    <>
     <main className="contact-container">
       <section className="banner">
         <div className="banner-content">
-          <h1>Contáctanos</h1>
-          <p>¡Nos encanta asesorarlo! Si tiene alguna pregunta, no dude en comunicarse con nosotros a través de los diferentes medios de comunicación disponibles.</p>
-          <p>Dirección: Cra. 36 #8a-40, Poblado, Medellín, Antioquia</p>
-          <p>Correo electrónico: info@luxuryspa.com</p>
-          <a href="#reservas">
-            <img src="/imagenes/whatsapp.svg" alt="WhatsApp" width="40px" />
+          <h1>Contactanos</h1>
+          <p>
+            ¡Nos encanta asesorarlo! Si tiene alguna pregunta, no dude en comunicarse con nosotros a través de los diferentes medios
+            de comunicación que tenemos disponible, ya sea por teléfono, WhatsApp o correo electrónico. Estamos aquí para atenderlo
+            y nos esforzaremos por responder a todas sus consultas con gusto.
+          </p>
+          
+          <p>Correo electrónico: <a href="mailto:info@luxuryspa.com">info@luxuryspa.com</a></p>
+          <a href="https://wa.me/NUMERO_DE_WHATSAPP" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <img src="/src/assets/whatsapp.svg" alt="WhatsApp" width="40px" /> 
           </a>
         </div>
         <div className="banner-image">
@@ -25,8 +32,11 @@ export default function ContactView() {
             referrerPolicy="no-referrer-when-downgrade"
             title="Ubicación"
           ></iframe>
+          <h3>Dirección: Cra. 36 #8a-40, Poblado, Medellín, Antioquia</h3>
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }

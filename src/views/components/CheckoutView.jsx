@@ -1,256 +1,295 @@
+// src/views/components/CheckoutView.jsx
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchServiceById } from '../../models/servicesModel';
 import { addAppointment } from '../../models/citasModel';
 import { useCart } from '../components/CartContext';
+import { useMemo } from 'react';
 import '../../styles/CheckoutView.css';
+import TimePicker from './TimePicker';
 
 export default function CheckoutView() {
-  // --- Estado para los items a procesar ---
+  
   const [itemsToCheckout, setItemsToCheckout] = useState([]);
-
-  // --- Estado de la vista ---
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [dateError, setDateError] = useState('');
+  const [durationMinutes, setDurationMinutes] = useState(60); //default 60 mins
+  const today = new Date();
+  const minDate = today.toISOString().split('T')[0]; // fecha actual en formato 'AAAA-MM-DD'
 
-  // --- Estado del formulario de agendamiento ---
+  const maxDateObj = new Date();
+  maxDateObj.setDate(today.getDate() + 30);//30 dias despues maximo para agendar
+  const maxDate = maxDateObj.toISOString().split('T')[0];
+
   const [formData, setFormData] = useState({
     name: '',
+    lastName: '',
     email: '',
     phone: '',
+    userCC: '',
     preferredDate: '',
     preferredTime: '',
+    notes: '',
   });
 
-  // --- Hooks de Router y Contexto ---
   const location = useLocation();
   const navigate = useNavigate();
-  const { cartItems, clearCart, cartCount } = useCart();
-
-  // Obtener el serviceId de los parámetros de la URL (para compra directa)
+  const { cartItems, clearCart, cartCount, loadCartFromFirestore  } = useCart();
   const serviceIdFromUrl = new URLSearchParams(location.search).get('serviceId');
 
+  // Agrupa items con cantidad para resumen pedido
+  const groupedItems = useMemo(() => {
+  return itemsToCheckout.reduce((acc, item) => {
+    const existing = acc.find(i => i.serviceId === item.serviceId);
 
-  // --- Efecto para determinar qué items cargar (compra directa vs. carrito) ---
+    if (existing) {
+      existing.cantidad += 1;
+    } else {
+      acc.push({
+        ...item,
+        cantidad: 1,
+        serviceId: item.serviceId || item.id
+      });
+    }
+
+    return acc;
+  }, []);
+}, [itemsToCheckout]);
+
   useEffect(() => {
     const processItems = async () => {
-      setLoading(true);
-      setError('');
-
-      // --- Caso 1: Compra Directa (Hay un serviceId en la URL) ---
+    setLoading(true);
+    setError('');
+    
+    try {
+      //si le da al boton comprar ahora en ServiciosDetalle
       if (serviceIdFromUrl) {
-        console.log("Checkout: Detectado flujo de compra directa para ID:", serviceIdFromUrl);
-        try {
-          const singleService = await fetchServiceById(serviceIdFromUrl);
-          if (singleService) {
-            setItemsToCheckout([singleService]);
-            console.log("Checkout: Servicio individual cargado correctamente.");
-          } else {
-            setError("Error: El servicio para compra directa no fue encontrado o el ID es inválido.");
-             setItemsToCheckout([]);
-             console.error("Checkout: Service ID from URL not found.");
-          }
-        } catch (err) {
-          console.error("Error cargando servicio para compra directa:", err);
-          setError("Error al cargar los detalles del servicio para la compra directa.");
-          setItemsToCheckout([]);
-        } finally {
-          setLoading(false);
-        }
-      }
-      // --- Caso 2: Compra Desde el Carrito (NO hay serviceId en la URL) ---
-      else {
-        console.log("Checkout: Detectado flujo de compra desde el carrito.");
-        if (cartCount === 0) {
-          setError("Tu carrito está vacío. Añade servicios antes de proceder al pago.");
-          setItemsToCheckout([]);
-           console.warn("Checkout: Carrito vacío al llegar a la página de checkout desde el carrito.");
-          // Opcional: redirigir de vuelta al carrito si está vacío
-          // navigate('/carrito', { replace: true });
+        const singleService = await fetchServiceById(serviceIdFromUrl);
+        if (singleService) {
+          singleService.imageFileName = singleService.imagenURL;
+          setItemsToCheckout([singleService]);
+          setDurationMinutes(singleService.Duracion || 60); 
         } else {
-          setItemsToCheckout(cartItems);
-          console.log("Checkout: Usando ítems del carrito para procesar.");
+          setError("El servicio no fue encontrado.");
+          setItemsToCheckout([]);
         }
-        setLoading(false);
+        return;
+      } else {
+        await loadCartFromFirestore(); //si hay elementos en el carrito
+        if (cartItems.length > 0) {
+          setItemsToCheckout(cartItems);
+          setDurationMinutes(cartItems[0]?.Duracion || 60);
+        } else {
+          setError("Tu carrito está vacío.");
+        }
       }
-    };
+    } catch (err) {
+      console.error("Error al cargar servicios:", err);
+      setError("Error al cargar los servicios.");
+      setItemsToCheckout([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // Disparamos el proceso de carga/determinación de ítems
-    // Se ejecutará cuando cambie serviceIdFromUrl, cartItems o cartCount
-     // Solo disparamos si hay serviceIdFromUrl o si el carrito tiene items.
-     // Si llegas aquí sin ID y con carrito vacío, el error se seteará dentro.
-     if (serviceIdFromUrl || cartCount > 0) {
-         processItems();
-     } else {
-         // Si no hay serviceId y el carrito está vacío al montar
-         setError("No hay servicios para procesar. Tu carrito está vacío.");
-         setLoading(false); // Ya está "cargado" con items vacíos
-         console.warn("Checkout: Página cargada sin items válidos.");
-         // navigate('/carrito', { replace: true }); // Redirigir inmediatamente si es necesario
-     }
+  processItems();
 
+  return () => {
+    setError('');
+  };
+  }, [serviceIdFromUrl]);
 
-    // Función de limpieza
-    return () => {
-        setError('');
-    };
+  useEffect(() => {//si no hay elementos
+    if (!serviceIdFromUrl && cartItems.length === 0) {
+      setItemsToCheckout([]);
+    }
+  }, [cartItems, serviceIdFromUrl]);
 
-  }, [serviceIdFromUrl, cartItems, cartCount, navigate]); // Dependencias
-
-   // Calcular el total
-   const total = itemsToCheckout.reduce((sum, item) => sum + parseFloat(item?.Precio || 0), 0);
+  const total = groupedItems.reduce((sum, item) => sum + parseFloat(item?.Precio || 0), 0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'preferredDate') {
+      const selectedDate = new Date(value);
+      const day = selectedDate.getDay(); 
+      // 6 = domingo
+      if (day === 6) {
+        setDateError('Los domingos no hay Laburo. Por favor elige otro día.');
+        return; // no actualiza el valor
+      } else {
+        setDateError('');
+      }
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
-  // Manejar el envío del formulario (Agendamiento y Simulación de Pago)
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
 
-    // --- Validaciones ---
     if (!formData.name || !formData.email || !formData.preferredDate) {
-        setError("Por favor, completa todos los campos de agendamiento requeridos (Nombre, Email, Fecha).");
-        setIsSubmitting(false);
-        return;
+      setError("Completa todos los campos requeridos.");
+      setIsSubmitting(false);
+      return;
     }
 
     if (itemsToCheckout.length === 0) {
-         setError("No hay servicios válidos para procesar en este momento.");
-         setIsSubmitting(false);
-         return;
+      setError("No hay servicios válidos para procesar.");
+      setIsSubmitting(false);
+      return;
     }
-
-
-    // --- Lógica para GUARDAR CITA(S) y (placeholder de) PROCESAR PAGO ---
 
     try {
       const savedAppointmentIds = [];
 
-      console.log("Guardando cita(s) en Firestore...");
-      for (const item of itemsToCheckout) {
-         const appointmentDataToSave = {
-             serviceId: item.id,
-             serviceName: item.Nombre,
-             servicePrice: item.Precio,
-             userName: formData.name,
-             userEmail: formData.email,
-             userPhone: formData.phone,
-             appointmentDate: formData.preferredDate,
-             appointmentTime: formData.preferredTime,
-             status: 'Pending Payment',
-             // userId: auth.currentUser?.uid,
-             createdAt: new Date()
-         };
-         const newAppointmentId = await addAppointment(appointmentDataToSave);
-         savedAppointmentIds.push(newAppointmentId);
-         console.log(`Cita para "${item.Nombre}" (pendiente de pago) guardada con ID:`, newAppointmentId);
+      for (const item of groupedItems) {
+        const appointmentDataToSave = {
+          serviceId: item.id,
+          serviceName: item.Nombre,
+          servicePrice: item.Precio,
+          userName: formData.name,
+          userLastName: formData.lastName,
+          userEmail: formData.email,
+          userPhone: formData.phone,
+          userCC: formData.userCC,
+          notes: formData.notes,
+          appointmentDate: formData.preferredDate,
+          appointmentTime: formData.preferredTime,
+          status: 'Pending Payment',
+          createdAt: new Date(),
+        };
+        const newAppointmentId = await addAppointment(appointmentDataToSave);
+        savedAppointmentIds.push(newAppointmentId);
       }
 
-      console.log("Todos los agendamientos pre-guardados con IDs:", savedAppointmentIds);
-
-
-      // 2. LIMPIAR EL CARRITO
       if (!serviceIdFromUrl) {
-         clearCart();
-         console.log("Carrito vaciado tras pre-agendamiento.");
+        clearCart();
       }
 
-
-      // 3. REDIRIGIR a la página de pago
-      console.log("Redirigiendo a la página de pago...");
       navigate('/pago', {
         state: {
           appointmentIds: savedAppointmentIds,
           totalAmount: total,
-          schedulingDetails: formData
-        }
+          schedulingDetails: formData,
+        },
       });
-
     } catch (submitError) {
-      console.error("Error al procesar el agendamiento/orden:", submitError);
-      setError(`Hubo un error al procesar la compra: ${submitError.message || 'Inténtalo de nuevo.'}`);
+      console.error("Error al agendar:", submitError);
+      setError("Error al procesar la compra. Inténtalo nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Muestra mensajes de estado (carga, error, enviando, vacío)
   if (error && !isSubmitting) return <p className="error">{error}</p>;
-
-  if (itemsToCheckout.length === 0 && !loading && !isSubmitting && !error) {
-       return <p className="info">No hay servicios válidos para procesar en este momento. Por favor, añade servicios para comprar.</p>;
-  }
-
   if (loading) return <p className="loading">Cargando detalles del servicio…</p>;
-
   if (isSubmitting) return <p className="loading">Procesando compra...</p>;
 
   return (
     <div className="checkout-page">
-      <h1>Completar Compra ({itemsToCheckout.length} {itemsToCheckout.length === 1 ? 'servicio' : 'servicios'})</h1>
+      <h1>Completar Compra</h1>
       <div className="checkout-content">
-
-        {/* Resumen de los items que se van a procesar (Columna Izquierda) */}
-        <div className="checkout-summary">
-            <h2>Resumen del Pedido</h2>
-            {itemsToCheckout.map(item => (
-                 <div key={item?.id || `item-${Math.random()}`} className="summary-item">
-                    {item?.imageFileName && <img src={`/assets/${item.imageFileName}`} alt={item.Nombre} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px', marginRight: '10px' }} />}
-                    <span>{item?.Nombre || 'Servicio Desconocido'}</span>
-                    <span style={{ float: 'right' }}>{item?.Precio || 'N/A'} COL</span>
-                 </div>
-            ))}
-            {/* Línea separadora y total */}
-            <div style={{ borderTop: '1px solid #eee', marginTop: '10px', paddingTop: '10px', fontWeight: 'bold' }}>
-                Total: <span style={{ float: 'right' }}>{total} COL</span>
-            </div>
-        </div>
-
-        {/* Formulario de Agendamiento (Columna Derecha) */}
         <form className="scheduling-form" onSubmit={handleSubmit}>
           <h2>Datos de Agendamiento</h2>
-           <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required disabled={isSubmitting} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phone">Teléfono:</label>
-                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} />
-              </div>
-           </div>
 
-           <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="preferredDate">Fecha Preferida para los servicios:</label>
-                <input type="date" id="preferredDate" name="preferredDate" value={formData.preferredDate} onChange={handleInputChange} required disabled={isSubmitting} />
-              </div>
-               <div className="form-group">
-                <label htmlFor="preferredTime">Hora Preferida para los servicios:</label>
-                <input type="time" id="preferredTime" name="preferredTime" value={formData.preferredTime} onChange={handleInputChange} disabled={isSubmitting} />
-              </div>
-           </div>
-
-           {/* Campos que van en su propia fila completa */}
+          <div className="form-row">
             <div className="form-group">
-              <label htmlFor="name">Nombre Completo:</label>
+              <label htmlFor="name">Nombre:</label>
               <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Apellido:</label>
+              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+          </div>
 
-          {/* Botón de Envío del Formulario (con estilos de la imagen) */}
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="userCC">CC:</label>
+              <input type="text" id="userCC" name="userCC" value={formData.userCC} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Teléfono:</label>
+              <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required disabled={isSubmitting} />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="notes">Información Adicional (Opcional):</label>
+            <textarea id="notes" name="notes" value={formData.notes} onChange={handleInputChange} disabled={isSubmitting} />
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="preferredDate">Fecha Preferida:</label>
+              <input
+                type="date"
+                id="preferredDate"
+                name="preferredDate"
+                value={formData.preferredDate}
+                onChange={handleInputChange}
+                required
+                disabled={isSubmitting}
+                min={minDate}
+                max={maxDate}
+              />
+              {dateError && <p className="error">{dateError}</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="preferredTime">Hora Preferida:</label>
+              <TimePicker
+                selectedDate={formData.preferredDate}
+                durationMinutes={itemsToCheckout.length > 0 ? itemsToCheckout[0].Duracion || 60 : 60} // duración del primer servicio, 60min default
+                value={formData.preferredTime}
+                onChange={(value) => handleInputChange({ target: { name: 'preferredTime', value } })}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+
           <button type="submit" className="btn btn-primary" disabled={isSubmitting || itemsToCheckout.length === 0}>
-            {isSubmitting ? 'Procesando...' : `Agendar y Proceder al Pago (${total} COP)`} {/* Texto y formato del botón de la imagen */}
+            {isSubmitting ? 'Procesando...' : `Agendar y Proceder al Pago ($${total.toLocaleString('es-CO')} COP)`}
           </button>
-           {error && !isSubmitting && <p className="error">{error}</p>}
 
+          {error && !isSubmitting && <p className="error">{error}</p>}
         </form>
-      </div>
 
+        <div className="checkout-summary">
+          <h2>Resumen del Pedido</h2>
+          {groupedItems.map(item => (
+            <div key={item?.id} className="summary-item">
+              {item?.imageFileName && (
+                <img
+                  src={item.imageFileName}
+                  alt={item.Nombre}
+                />
+              )}
+              <div>
+                <span style={{fontWeight: 'bold',fontSize:  18}}>{item?.Nombre || 'Servicio Desconocido'}</span>
+                <div>
+                  Cantidad: {item.cantidad} &nbsp;|&nbsp; Subtotal: {(item.cantidad * parseFloat(item?.Precio || 0)).toLocaleString()} COP
+                </div>
+                <div>
+                  Duracion: {item.Duracion} minutos
+                </div>
+              </div>
+            </div>
+          ))}
+          <div style={{ borderTop: '1px solid #eee', marginTop: '10px', paddingTop: '10px', fontWeight: 'bold', fontSize:  18}}>
+            Total: <span style={{ float: 'right' }}>${total.toLocaleString('es-CO')} COL</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

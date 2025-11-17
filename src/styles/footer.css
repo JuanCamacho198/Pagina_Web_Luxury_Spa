@@ -1,8 +1,8 @@
 /* src/styles/footer.css */
 
 footer {
-  background-color: var(--color-text-primary); /* Usando la variable de color */
-  color: var(--color-secondary); /* Usando la variable de color */
+  background-color: #251c05;
+  color: #dac794;
   padding: 40px 20px;
   font-size: 0.9em;
   line-height: 1.6;
@@ -17,7 +17,7 @@ footer {
 }
 
 .footer-section h4 {
-  color: var(--color-accent); /* Usando la variable de color */
+  color: var(--color-accent);
   margin-bottom: 15px;
   font-size: 1.2em;
   font-weight: bold;
@@ -28,13 +28,13 @@ footer {
 }
 
 .footer-section a {
-  color: var(--color-secondary); /* Usando la variable de color */
+  color: var(--color-secondary);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-  color: var(--color-accent); /* Usando la variable de color */
+  color: var(--color-accent);
 }
 
 .footer-section ul {
@@ -63,22 +63,52 @@ footer {
 }
 
 .social-media img {
-  width: 30px; /* Reduce el tamaño de los iconos */
+  width: 30px;
   height: auto;
 }
 
+/* Mejoras para el logo en footer */
+
+.footer-section.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.footer-section.logo-section img {
+  width: 100px; /* Tamaño adecuado para logo en footer */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px; /* Opcional: bordes suaves */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* Opcional: sombra para que resalte */
+}
+
+/* Centrar el título debajo del logo */
+.footer-section.logo-section h4 {
+  margin: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+/* Footer bottom text */
 footer > p {
   text-align: center;
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid #555; /* Puedes usar una variable si lo prefieres */
-  color: var(--color-secondary); /* Usando la variable de color */
+  border-top: 1px solid #555;
+  color: var(--color-secondary);
 }
 
-/* Estilos responsivos para pantallas más pequeñas */
+/* Responsivo */
+
 @media (max-width: 768px) {
   .footer-container {
-    grid-template-columns: 1fr; /* Apila las secciones en pantallas pequeñas */
+    grid-template-columns: 1fr;
     text-align: center;
   }
 
@@ -87,6 +117,11 @@ footer > p {
   }
 
   .social-media {
-    justify-content: center; /* Centra los iconos en pantallas pequeñas */
+    justify-content: center;
+  }
+
+  /* Ajustes del logo en móvil */
+  .footer-section.logo-section img {
+    width: 80px;
   }
 }

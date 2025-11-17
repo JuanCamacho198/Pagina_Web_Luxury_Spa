@@ -1,0 +1,353 @@
+/* src/styles/ServiceDetailView.css */
+
+.service-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  padding-left: 2rem;
+  background-color: #f8f8f8; /* Un fondo suave */
+}
+
+.service-detail {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.service-detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333; /* Un título oscuro */
+}
+
+.service-detail-image-container {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.service-detail-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.service-detail-info {
+  margin-bottom: 1.5rem;
+}
+
+.service-detail-price {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.service-detail-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.service-detail-buy-btn,
+.service-detail-cart-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.service-detail-buy-btn {
+  background-color: #e78c25; /* Un azul primario */
+  color: #fff;
+}
+
+.service-detail-buy-btn:hover {
+  background-color: #b9711f;
+}
+
+.service-detail-cart-btn {
+  background-color: #6c757d; /* Un gris secundario */
+  color: #fff;
+}
+
+.service-detail-cart-btn:hover {
+  background-color: #545b62;
+}
+
+.service-detail-duration {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.service-detail-description {
+  margin-bottom: 1.5rem;
+}
+
+.service-detail-description h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.service-detail-description p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.service-detail-includes,
+.service-detail-benefits {
+  margin-bottom: 1.5rem;
+}
+
+.service-detail-includes h3,
+.service-detail-benefits h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.service-detail-includes ul,
+.service-detail-benefits ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+  padding-left: 0;
+}
+
+.service-detail-includes li,
+.service-detail-benefits li {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 600px) {
+  .service-detail {
+    padding: 1rem;
+  }
+
+  .service-detail-title {
+    font-size: 1.5rem;
+  }
+
+  .service-detail-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.recommended-services {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.recommended-services h3 {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.recommended-services-list {
+  display: flex;
+  justify-content: center; /* <-- centrado horizontal */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.recommended-service-card {
+  width: 200px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recommended-service-card:hover {
+  transform: scale(1.05);
+}
+
+.recommended-service-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.service-detail-content {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.service-detail-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.service-detail-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .service-detail-content {
+    flex-direction: column;
+  }
+}
+
+
+/* Estilos para las notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  min-width: 320px;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 8px;
+}
+
+.notification-message {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-right: 12px;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  opacity: 0.7;
+}
+
+.notification-close:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Tipos de notificación */
+.notification-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.notification-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.notification-warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.notification-info {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Estilos para el botón de carrito con estado de carga */
+.service-detail-cart-btn {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.service-detail-cart-btn.adding {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.service-detail-cart-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner de carga */
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive para notificaciones */
+@media (max-width: 768px) {
+  .notification {
+    left: 20px;
+    right: 20px;
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .notification-content {
+    padding: 14px 16px;
+  }
+  
+  .notification-message {
+    font-size: 13px;
+  }
+}
+
+

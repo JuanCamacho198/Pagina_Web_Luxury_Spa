@@ -11,9 +11,7 @@ import {
 
 const USERS_COLL = "Usuarios";
 
-/**
- * Guarda (o crea) un usuario en Firestore.
- */
+/*Guarda (o crea) un usuario en Firestore.*/
 export async function saveUserData(uid, nombre, apellido, correo, contraseña) {
   console.log("[userModel] ⇢ saveUserData llamado con:", {
     uid, nombre, apellido, correo, contraseña
@@ -28,9 +26,7 @@ export async function saveUserData(uid, nombre, apellido, correo, contraseña) {
   }
 }
 
-/**
- * Trae un usuario por UID.
- */
+/*Trae un usuario por UID.*/
 export async function getUserById(uid) {
   const ref = doc(db, USERS_COLL, uid);
   const snap = await getDoc(ref);
@@ -38,17 +34,13 @@ export async function getUserById(uid) {
   return { uid: snap.id, ...snap.data() };
 }
 
-/**
- * Actualiza campos de un usuario ya existente.
- */
+/*Actualiza campos de un usuario ya existente.*/
 export async function updateUserData(uid, updates) {
   const ref = doc(db, USERS_COLL, uid);
   await updateDoc(ref, updates);
 }
 
-/**
- * Borra el documento de un usuario en Firestore.
- */
+/*Borra el documento de un usuario en Firestore.*/
 export async function deleteUserData(uid) {
   console.log("[userModel] ⇢ deleteUserData llamado para UID:", uid);
   const ref = doc(db, USERS_COLL, uid);

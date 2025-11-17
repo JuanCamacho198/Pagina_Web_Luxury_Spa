@@ -1,113 +1,176 @@
+/* src/styles/PaymentView.css */
+
+/* General Layout (sin cambios) */
 .payment-page {
-    padding: 2rem;
-    background: #F5E8D0;
-    max-width: 600px;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.payment-page h1 {
-     color: #3A3831;
-     font-size: 2.2rem;
-     font-weight: 700;
-     margin-bottom: 2rem;
+.payment-page h1,
+.payment-page h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-/* Resumen del pedido en la página de pago */
+/* Payment Summary (sin cambios) */
 .payment-summary {
-    background-color: #FFF;
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    text-align: left;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-     border-left: 5px solid #3A3831;
-}
-
-.payment-summary h2 {
-     color: #3A3831;
-     margin-top: 0;
-     margin-bottom: 1.2rem;
-     border-bottom: 1px solid #eee;
-     padding-bottom: 0.5rem;
-     font-size: 1.5rem;
-     font-weight: 600;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
 }
 
 .payment-summary p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555;
 }
 
-.payment-summary p strong {
-    color: #3A3831;
+.payment-summary strong {
+  color: #333;
 }
 
-/* Contenedor principal del formulario de pago */
-.payment-form-container {
-    background-color: #FFF;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+/* Payment Methods Section (sin cambios) */
+.payment-methods-selection {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.payment-methods-selection h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
     text-align: left;
 }
 
-.payment-form-container h2 {
-     color: #3A3831;
-     margin-top: 0;
-     margin-bottom: 1.5rem;
-     font-size: 1.8rem;
-     font-weight: 600;
-     text-align: center;
+/* --- Horizontal Display for Payment Methods (Más compacto, como iconos) --- */
+.payment-methods-container {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que se envuelvan si no hay espacio */
+  justify-content: center; /* Centrar los elementos horizontalmente */
+  gap: 1.5rem; /* Aumenta un poco el espacio entre los iconos para que no se vean tan juntos */
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
 }
 
-#payment-element {
-     margin-bottom: 2rem;
-     padding: 30px;
-     border: 2px dashed #ccc;
-     border-radius: 8px;
-     text-align: center;
-     min-height: 150px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     color: #777;
-     font-style: italic;
-     font-size: 1.1rem;
+.payment-method-option {
+  /* Eliminar o reducir significativamente el padding y los bordes para un look más simple */
+  flex-shrink: 0;
+  flex-grow: 0;
+  min-width: 80px; /* Ancho mínimo más pequeño para cada icono */
+  max-width: 100px; /* Ancho máximo para cada icono */
+
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Eliminar el borde */
+  border-radius: 0; /* Eliminar el border-radius */
+  cursor: pointer;
+  padding: 0.5rem 0.25rem; /* Padding mínimo, solo para el espacio interno */
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.payment-form-container .btn-primary {
-    display: block;
-    width: 100%;
-     margin-top: 1rem;
-     font-size: 1.1rem;
+/* Estilo al pasar el mouse */
+.payment-method-option:hover {
+  /* Solo un ligero cambio de color de fondo o un borde sutil al pasar el mouse */
+  background-color: #f5f5f5; /* Fondo ligeramente gris para el hover */
+  /* border-color: #007bff; // Si quieres un borde */
+  box-shadow: none; /* Eliminar sombra si estaba */
+  transform: translateY(-1px); /* Un pequeño levantamiento */
 }
 
-
-.loading, .error {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1rem;
+/* Estilo para el método de pago seleccionado */
+.payment-method-option.selected {
+  background-color: #e6f2ff; /* Un azul muy claro */
+  /* Mantener un borde sutil o un resaltado para indicar selección */
+  border: 1px solid #007bff; /* Borde más sutil para la selección */
+  border-radius: 4px; /* Un pequeño radio si se le da borde al seleccionar */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); /* Un glow más suave */
 }
+
+.payment-method-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.payment-method-image {
+  width: 60px; /* Tamaño de la imagen como en la referencia (puedes ajustar) */
+  height: auto;
+  margin-bottom: 0.25rem; /* Menos espacio entre la imagen y el texto */
+  filter: grayscale(0%); /* Dejar sin escala de grises para que se vean siempre a color */
+  /* transition: filter 0.2s ease-in-out; // Puedes quitar esto si no usas el efecto de grayscale */
+}
+
+.payment-method-option.selected .payment-method-image {
+  /* No se necesita filtro de escala de grises si siempre están a color */
+  filter: grayscale(0%);
+}
+
+.payment-method-name {
+  font-size: 0.8rem; /* Texto aún más pequeño */
+  color: #555; /* Un gris más suave para el texto */
+  font-weight: 400; /* Fuente más ligera */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Botón de Pago (sin cambios) */
+.btn-primary {
+  background-color: #015ec2;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 9px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #003c7c;
+}
+
+.btn-primary:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Mensajes de Carga y Error (sin cambios) */
+.loading,
 .error {
-    color: #c0392b;
-    background-color: #fadde1;
-    border: 1px solid #e74c3c;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.1rem;
 }
+
 .loading {
-     color: #555;
+  color: #555;
 }
-.small-text {
-     font-size: 0.8rem;
-     color: #888;
-     margin-top: 1rem;
-     text-align: right;
+
+.error {
+  color: #D8000C;
+  background-color: #FFD2D2;
+  border: 1px solid #D8000C;
+  border-radius: 5px;
+  margin-top: 1rem;
 }

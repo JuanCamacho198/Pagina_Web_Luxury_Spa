@@ -1,36 +1,147 @@
+/* src/styles/SuccessView.css */
+
 .success-page {
-    padding: 3rem;
-    background: #e9f7ef;
-    max-width: 600px;
-    margin: 4rem auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-    border: 2px solid #8bc34a;
-    color: #155724;
+  padding: 3rem;
+  background: #ffffff; /* Fondo blanco para un look más limpio */
+  max-width: 650px; /* Un poco más de ancho */
+  margin: 4rem auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+  text-align: center;
+  border: none; /* Eliminar el borde principal, la sombra ya lo resalta */
+  color: #333; /* Color de texto más estándar */
+  position: relative; /* Para posibles elementos absolutos si se añaden más */
+  overflow: hidden; /* Asegura que nada se desborde */
 }
+
+/* Fondo verde en la parte superior para un toque de color */
+.success-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Altura de la franja verde superior */
+  background-color: #4CAF50; /* Verde más vibrante para éxito */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  z-index: 0; /* Asegura que esté detrás del contenido */
+}
+
+.success-icon-container {
+  position: relative; /* Para que el icono quede sobre la franja verde */
+  z-index: 1; /* Asegura que el icono esté encima de la franja */
+  margin-top: -40px; /* Mueve el icono hacia arriba, dentro de la franja */
+  margin-bottom: 1.5rem;
+}
+
+.success-icon {
+  font-size: 5rem; /* Tamaño grande del icono */
+  color: #fff; /* Color blanco para el icono */
+  background-color: #4CAF50; /* Fondo del icono igual al de la franja */
+  border-radius: 50%; /* Icono circular */
+  padding: 10px; /* Espaciado dentro del círculo */
+  border: 5px solid #fff; /* Borde blanco para separar del fondo verde */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Sombra para el icono */
+}
+
 
 .success-page h1 {
-    color: #2e7d32;
-    margin-bottom: 1.5rem;
-    font-size: 2.5rem;
-    font-weight: 700;
+  color: #333; /* Un color más oscuro para el título principal */
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem; /* Tamaño de fuente ligeramente ajustado */
+  font-weight: 700;
+  margin-top: 1rem; /* Espacio para que el título no quede pegado al icono */
 }
 
-.success-page p {
+.success-details p {
+  font-size: 1rem; /* Tamaño de fuente para los detalles */
+  margin-bottom: 0.5rem; /* Menos margen entre líneas de detalles */
+  color: #555;
+  line-height: 1.5;
+}
+
+.highlight-amount {
+  color: #007bff; /* Color azul para el monto */
+  font-weight: 700;
+  font-size: 1.1rem; /* Un poco más grande para el monto */
+}
+
+.thank-you-message {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: 2.5rem; /* Espacio antes de los botones */
+  color: #4CAF50; /* Color verde para el mensaje de agradecimiento */
+}
+
+.success-actions {
+  display: flex; /* Usar flexbox para los botones */
+  flex-direction: column; /* Apilar los botones en columna */
+  gap: 1rem; /* Espacio entre los botones */
+  max-width: 300px; /* Ancho máximo para el grupo de botones */
+  margin: 0 auto; /* Centrar los botones */
+}
+
+/* Estilos para los botones (reutiliza tus btn-primary existentes) */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none; /* Asegura que no haya subrayado en los enlaces */
+  transition: all 0.2s ease-in-out;
+  display: block; /* Para que cada botón ocupe su propia línea */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible en la columna */
+  box-sizing: border-box; /* Incluye padding y border en el width */
+}
+
+.btn-primary {
+  background-color: #e78c25;
+  color: white;
+  border: 1px solid #e78c25;
+  border-radius: 18px;
+}
+
+.btn-primary:hover {
+  background-color: #b9711f;
+  border-color: #b9711f;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+  border-color: #bbb;
+}
+
+/* Responsividad básica */
+@media (max-width: 600px) {
+  .success-page {
+    margin: 2rem 1rem;
+    padding: 2rem 1.5rem;
+  }
+  .success-page h1 {
+    font-size: 2rem;
+  }
+  .success-icon {
+    font-size: 4rem;
+  }
+  .success-page::before {
+    height: 70px;
+  }
+  .success-icon-container {
+    margin-top: -35px;
+  }
+  .success-details p {
+    font-size: 0.95rem;
+  }
+  .thank-you-message {
     font-size: 1.1rem;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.success-page a {
-    color: #1976d2;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 1rem;
-    display: inline-block;
-}
-
-.success-page a:hover {
-    text-decoration: underline;
+  }
 }

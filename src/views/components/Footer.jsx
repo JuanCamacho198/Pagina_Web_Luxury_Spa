@@ -1,15 +1,17 @@
+// src/views/components/Footer.jsx
 import React from 'react';
-import '../../styles/Footer.css';
+import logo from '../../assets/logo2.png';
+import { Link } from 'react-router-dom';
+import '../../styles/footer.css'; 
+
 
 const Footer = () => {
   return (
     <footer>
       <div className="footer-container">
         <div className="footer-section">
-          <h4>Sobre Nosotros</h4>
-          <p>Luxury Spa nos dedicamos a ofrecer un servicio de calidad en relajación, belleza y salud, priorizando 
-            la satisfacción del cliente, buscamos siempre superar las expectativas de nuestros clientes
-             y promover su bienestar físico y emocional.</p>
+          <img src={logo}alt="Luxury Spa logo" />
+          <h4>Luxury Spa</h4>
         </div>
 
         <div className="footer-section">
@@ -22,7 +24,7 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Horario de Atención</h4>
           <p>Lunes a Viernes: 9:00 AM - 7:00 PM</p>
-          <p>Sábado: 9:00 AM - 2:00 PM</p>
+          <p>Sábado: 9:00 AM - 4:00 PM</p>
           <p>Domingo: Cerrado</p>
         </div>
 
@@ -36,9 +38,12 @@ const Footer = () => {
         </div>
 
         <div className="footer-section">
-          <h4>Servicios</h4>
+          <h4>Menu</h4>
           <ul>
-            <li><a href="#">Consultas Generales</a></li>
+            <li><Link to="/politicas-cancelacion">- Políticas de Cancelación y Reserva</Link></li>
+            <li><Link to="/politica-datos">- Política de Tratamiento de Datos Personales</Link></li>
+            <li><Link to="/informacion-reserva">- Información Importante para su Reserva</Link></li>
+            <li><Link to="/preguntas-frecuentes">- Preguntas Frecuentes</Link></li>
           </ul>
         </div>
 

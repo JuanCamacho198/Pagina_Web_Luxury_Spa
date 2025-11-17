@@ -1,12 +1,10 @@
 // src/controllers/authController.js
 import authModel from "../models/authModel";
-import { saveUserData } from "../models/userModel";       // <-- import nombrado
+import { saveUserData } from "../models/userModel";    
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
-/**
- * Registra en Auth + Firestore, ahora usando saveUserData correctamente.
- */
+/*Registra en Auth + Firestore, ahora usando saveUserData correctamente.*/
 const registroUsuario = async (
   nombre,
   apellido,
@@ -23,7 +21,7 @@ const registroUsuario = async (
     // Guardado en Firestore
     await saveUserData(uid, nombre, apellido, correo, contraseña);
 
-    // Verificación inmediata
+    // Verificación
     const snap = await getDoc(doc(db, "Usuarios", uid));
     if (snap.exists()) {
       console.log("[registroUsuario] ✔ documento guardado:", snap.data());

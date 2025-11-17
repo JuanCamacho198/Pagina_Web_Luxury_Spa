@@ -1,0 +1,98 @@
+/* src/styles/PaymentSuccessModal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  backdrop-filter: blur(3px); /* Efecto de desenfoque opcional */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  max-width: 450px; /* Ancho máximo del modal */
+  width: 90%; /* Ancho responsivo */
+  text-align: center;
+  position: relative; /* Para posicionar el botón de cerrar */
+  transform: scale(0.95); /* Pequeña escala para la animación de entrada */
+  animation: modal-fade-in 0.3s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content h2 {
+  color: #28a745; /* Color verde para éxito */
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-button:hover {
+  color: #777;
+}
+
+.modal-actions {
+  margin-top: 1.5rem;
+}
+
+/* Reutiliza tu estilo .btn-primary existente o define uno específico para el modal */
+.modal-content .btn-primary {
+    width: auto; /* Para que el botón no ocupe todo el ancho del modal */
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    margin-top: 0; /* Reinicia el margen del botón */
+}
+
+.highlight {
+  color: #007bff; /* Un color para resaltar el monto total */
+  font-weight: bold;
+}
+
+/* Responsividad básica */
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 1.5rem;
+  }
+  .modal-content h2 {
+    font-size: 1.5rem;
+  }
+  .modal-content p {
+    font-size: 0.95rem;
+  }
+}

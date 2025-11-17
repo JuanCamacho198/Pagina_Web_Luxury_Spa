@@ -1,3 +1,4 @@
+// src/views/LoginView.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LoginView.css';

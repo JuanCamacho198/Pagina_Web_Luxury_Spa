@@ -1,9 +1,12 @@
+// src/views/PublicHomeViewView.jsx
 import React from 'react';
+import Footer from './components/Footer';
 import { Link } from 'react-router-dom';
 import '../styles/PublicHomeView.css';
 
 export default function PublicHomeView() {
   return (
+    <>
     <div className="public-home">
       {/* Banner principal */}
       <header className="banner">
@@ -16,7 +19,7 @@ export default function PublicHomeView() {
             y déjate consentir!
           </p>
           <div className="buttons">
-            <Link to="/contacto" className="btn btn-primary">
+            <Link to="/contacto" className="btn btn-primaryP">
               ¿Quieres Conocernos?
             </Link>
             <Link to="/servicios" className="btn btn-secondary">
@@ -32,14 +35,17 @@ export default function PublicHomeView() {
       {/* Segundo bloque de información */}
       <section className="info-cards">
         <div className="caja">
-          <img src="/src/assets/cinco.png" alt="Servicio" />
+          
           <h3>Más de 5 años ofreciendo servicios</h3>
         </div>
         <div className="caja">
-          <img src="/src/assets/ubicacion.png" alt="Ubicación" />
+          
           <h3>Encuéntranos en Calle87c #23-52</h3>
         </div>
       </section>
+      
     </div>
+    <Footer />
+    </>
   );
 }
