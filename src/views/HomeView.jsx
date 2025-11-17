@@ -1,8 +1,6 @@
 // src/views/HomeView.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase/firebaseConfig';
-import { signOut } from 'firebase/auth';
 import Footer from './components/Footer';
 import { fetchServices } from '../models/servicesModel';
 import '../styles/HomeView.css';
@@ -15,21 +13,6 @@ function HomeView() {
   const totalImages = 3;
   const [services, setServices] = React.useState([]);
 
-  const [productIndex, setProductIndex] = React.useState(0);
-  const productsToShow = 3;
-
-
-  const handlePrevProducts = () => {
-    setProductIndex((prevIndex) =>
-      prevIndex === 0 ? Math.max(0, services.length - productsToShow) : prevIndex - 1
-    );
-  };
-
-  const handleNextProducts = () => {
-    setProductIndex((prevIndex) =>
-      prevIndex + productsToShow >= services.length ? 0 : prevIndex + 1
-    );
-  };
 
   React.useEffect(() => {
   async function loadServices() {
@@ -53,16 +36,6 @@ function HomeView() {
 
   const handleNext = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % totalImages);
-  };
-
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
   };
 
   return (
@@ -93,7 +66,7 @@ function HomeView() {
             {[1, 2, 3].map((index) => (
               <img
                 key={index}
-                src={`/public/assets/carrusel${index}.jpg`}
+                src={`/assets/carrusel${index}.jpg`}
                 alt={`Imagen ${index}`}
                 className="carousel-image"
                 style={{ transform: `translateX(calc(-100% * ${activeIndex}))` }}

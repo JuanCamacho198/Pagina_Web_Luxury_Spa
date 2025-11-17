@@ -34,8 +34,8 @@ export default function CitasView() {
 
         const list = await fetchAppointments(currentUser.uid);
         setCitas(list);
-      } catch (e) {
-        setError('No se pudo cargar las citas.');
+      } catch (error) {
+        setError('No se pudo cargar las citas.', error.message);
       } finally {
         setLoading(false);
       }
@@ -50,8 +50,8 @@ export default function CitasView() {
       await deleteAppointment(modalId);
       setCitas(prev => prev.filter(cita => cita.id !== modalId));
       showNotification('✅ Cita cancelada exitosamente', 'success');
-    } catch (e) {
-      showNotification('❌ No se pudo cancelar la cita', 'error');
+    } catch (error) {
+      showNotification('❌ No se pudo cancelar la cita', error.message || 'error');
     } finally {
       setModalId(null);
       setCancelingId(null);
@@ -69,15 +69,6 @@ export default function CitasView() {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    });
-  };
-
-  const formatTime = (timestamp) => {
-    if (!timestamp) return '';
-    const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
-    return date.toLocaleTimeString('es-CO', {
-      hour: '2-digit',
-      minute: '2-digit'
     });
   };
 

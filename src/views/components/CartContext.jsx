@@ -1,5 +1,5 @@
 // src/views/components/CartContext.jsx
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { getFirestore, collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 

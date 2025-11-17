@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllServices } from '../controllers/servicesController';
-import { auth } from '../firebase/firebaseConfig';
-import { useCart } from './components/CartContext';
 import Footer from './components/Footer';
 import '../styles/ServicesView.css';
 
@@ -13,8 +11,6 @@ export default function ServicesView() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [sortOption, setSortOption] = useState('');
   const navigate = useNavigate();
-  const user = auth.currentUser;
-  const { addItem, cartItems } = useCart();
 
   const categories = ['Todos', ...new Set(services.map(service => service.Categoria))];
 
