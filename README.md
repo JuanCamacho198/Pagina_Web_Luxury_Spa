@@ -12,9 +12,6 @@ Vanessa Benitez
  - **Proyecto**: Aplicación frontend de un sitio para un spa de lujo, creada con React y Vite.
  - **Funcionalidad principal**: navegación pública/privada, registro e inicio de sesión (Firebase), gestión de citas, catálogo de servicios, carrito y proceso de pago simulado.
 
-**Estado**
- - **Branch**: `main`
- - **Status**: Desarrollo (puede contener datos de ejemplo y configuración local de Firebase).
 
 **Tecnologías**
  - **Frontend**: React, Vite
@@ -103,7 +100,6 @@ VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id
 
 **Alcance**
  - **Incluye**: Frontend completo en React (Vite), integración con Firebase Auth y Firestore para datos básicos, gestión de citas, catálogo de servicios, carrito y flujo de checkout simulado, estilos y vistas para móvil/desktop.
- - **No incluye**: Backend propio aparte de Firebase (no se implementan microservicios ni pasarelas de pago reales). Integración con pasarelas de pago reales queda fuera del alcance actual.
 
 **Entregables**
  - Aplicación web funcional desplegable localmente y en hosting (ej. Vercel/Netlify).
@@ -118,13 +114,8 @@ VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id
  - Gestión de carrito y proceso de checkout (simulado), con modal de confirmación.
  - Perfil de usuario con historial de citas.
 
-**Requerimientos no funcionales**
- - Rendimiento: tiempos de carga razonables y uso de Vite para desarrollo rápido.
- - Seguridad: no exponer credenciales en el repositorio; usar `VITE_` variables de entorno.
- - Accesibilidad básica: navegación por teclado y estructuras semánticas en vistas principales.
- - Responsividad: layouts adaptados a móvil y escritorio.
 
-**Cronograma / Hitos (sugerido)**
+**Cronograma**
  - Fase 1 — Diseño y prototipado: wireframes y estructura de vistas.
  - Fase 2 — Implementación del frontend: vistas, rutas y componentes.
  - Fase 3 — Integración con Firebase: Auth y Firestore para citas/servicios.
@@ -132,7 +123,7 @@ VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id
  - Fase 5 — Documentación y despliegue.
 
 **Diseño / UX**
- - Mantener coherencia visual con paleta y tipografías elegantes (tema spa de lujo).
+ - Mantener coherencia visual con paleta y tipografías elegantes 
  - Usar imágenes y assets en `public/assets` y `src/assets` para marketing y banners.
  - Priorizar un flujo de reserva sencillo: seleccionar servicio → elegir fecha/hora → confirmar en checkout.
 
