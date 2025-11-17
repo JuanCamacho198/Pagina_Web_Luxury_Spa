@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import '../../styles/SuccessView.css';
+import styles from '../../styles/SuccessView.module.css';
 import { FaCheckCircle } from 'react-icons/fa'; // Importa un icono de "check"
 
 // Si no tienes react-icons instalado, puedes instalarlo:
@@ -39,17 +39,17 @@ export default function SuccessView() {
   };
 
   return (
-    <div className="success-page">
-      <div className="success-icon-container">
-        <FaCheckCircle className="success-icon" /> {/* Icono de éxito */}
+    <div className={styles['success-page']}>
+      <div className={styles['success-icon-container']}>
+        <FaCheckCircle className={styles['success-icon']} /> {/* Icono de éxito */}
       </div>
       <h1>¡Agendamiento y Pago Confirmados!</h1>
 
-      <div className="success-details">
+      <div className={styles['success-details']}>
         <p>Tu cita ha sido agendada exitosamente y el pago ha sido procesado.</p>
         
         {totalAmount && (
-          <p><strong>Monto Total Pagado:</strong> <span className="highlight-amount">{totalAmount} COL</span></p>
+          <p><strong>Monto Total Pagado:</strong> <span className={styles['highlight-amount']}>{totalAmount} COL</span></p>
         )}
         {paymentMethod && (
           <p><strong>Método de Pago:</strong> {getPaymentMethodName(paymentMethod)}</p>
@@ -60,11 +60,11 @@ export default function SuccessView() {
         {/* Aquí podrías añadir más detalles de schedulingDetails si los necesitas mostrar */}
       </div>
 
-      <p className="thank-you-message">Gracias por tu compra.</p>
+      <p className={styles['thank-you-message']}>Gracias por tu compra.</p>
 
-      <div className="success-actions">
-        <a href="/citas" className="btn btn-secondary">Ver mis citas agendadas</a>
-        <a href="/" className="btn btn-primary">Volver a la página principal</a>
+      <div className={styles['success-actions']}>
+        <a href="/citas" className={`${styles.btn} ${styles['btn-secondary']}`}>Ver mis citas agendadas</a>
+        <a href="/" className={`${styles.btn} ${styles['btn-primary']}`}>Volver a la página principal</a>
       </div>
     </div>
   );

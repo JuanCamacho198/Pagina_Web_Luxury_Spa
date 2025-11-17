@@ -2,42 +2,42 @@
 
 import logo from '../../assets/logo2.png';
 import { Link } from 'react-router-dom';
-import '../../styles/footer.css'; 
+import styles from '../../styles/footer.module.css'; 
 
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="footer-container">
-        <div className="footer-section">
-          <img src={logo}alt="Luxury Spa logo" />
+    <footer className={styles.footer}>
+      <div className={styles['footer-container']}>
+        <div className={styles['footer-section']}>
+          <img src={logo} alt="Luxury Spa logo" />
           <h4>Luxury Spa</h4>
         </div>
 
-        <div className="footer-section">
+        <div className={styles['footer-section']}>
           <h4>Contacto</h4>
           <p>Dirección: Calle 87c#23-52</p>
           <p>Teléfono: (123) 456-7890</p>
           <p>Email: <a href="mailto:contacto@.com">contacto@.com</a></p>
         </div>
 
-        <div className="footer-section">
+        <div className={styles['footer-section']}>
           <h4>Horario de Atención</h4>
           <p>Lunes a Viernes: 9:00 AM - 7:00 PM</p>
           <p>Sábado: 9:00 AM - 4:00 PM</p>
           <p>Domingo: Cerrado</p>
         </div>
 
-        <div className="footer-section">
+        <div className={styles['footer-section']}>
           <h4>Síguenos en Redes Sociales</h4>
-          <div className="social-media">
+          <div className={styles['social-media']}>
             <a href="#" aria-label="Facebook"><img src="../../src/assets/facebook.svg" alt="Facebook" width="40px" /></a>
             <a href="#" aria-label="Instagram"><img src="../../src/assets/instagram.svg" alt="Instagram" width="40px" /></a>
             <a href="#" aria-label="Twitter"><img src="../../src/assets/whatsapp.svg" alt="Twitter" width="40px" /></a>
           </div>
         </div>
 
-        <div className="footer-section">
+        <div className={styles['footer-section']}>
           <h4>Menu</h4>
           <ul>
             <li><Link to="/politicas-cancelacion">- Políticas de Cancelación y Reserva</Link></li>
@@ -47,7 +47,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="footer-section">
+        <div className={styles['footer-section']}>
           <h4>Enlaces Útiles</h4>
           <ul>
             <li><a href="#">Política de Privacidad</a></li>

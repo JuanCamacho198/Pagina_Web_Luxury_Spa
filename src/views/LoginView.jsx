@@ -1,7 +1,7 @@
 // src/views/LoginView.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/LoginView.css';
+import styles from '../styles/LoginView.module.css';
 
 const LoginView = ({ onLogin, error }) => {
   const [email, setEmail] = useState('');
@@ -13,12 +13,12 @@ const LoginView = ({ onLogin, error }) => {
   };
 
   return (
-    <div className = "login-container">
-      <div className="login-content"> 
+    <div className = {styles['login-container']}>
+      <div className={styles['login-content']}> 
         <h2>Iniciar Sesión</h2>
-        {error && <p className="error-message">{"Contraseña Incorrecta"}</p>}
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="loginform-group">
+        {error && <p className={styles['error-message']}>{"Contraseña Incorrecta"}</p>}
+        <form onSubmit={handleSubmit} className={styles['login-form']}>
+          <div className={styles['loginform-group']}>
             <label htmlFor="email">Correo:</label>
             <input
               type="email"
@@ -26,10 +26,10 @@ const LoginView = ({ onLogin, error }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="loginform-input"
+              className={styles['loginform-input']}
             />
           </div>
-          <div className="loginform-group">
+          <div className={styles['loginform-group']}>
             <label htmlFor="password">Contraseña:</label>
             <input
               type="password"
@@ -37,13 +37,13 @@ const LoginView = ({ onLogin, error }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="loginform-input"
+              className={styles['loginform-input']}
             />
           </div>
-          <button type="submit" className="login-button">Iniciar Sesión</button>
+          <button type="submit" className={styles['login-button']}>Iniciar Sesión</button>
         </form>
-        <p className="lregister-link-text">
-          ¿No tienes cuenta? <Link to="/register" className="lregister-link">Regístrate aquí</Link>
+        <p className={styles['lregister-link-text']}>
+          ¿No tienes cuenta? <Link to="/register" className={styles['lregister-link']}>Regístrate aquí</Link>
         </p>
       </div>
     </div>

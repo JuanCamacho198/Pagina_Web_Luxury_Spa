@@ -1,6 +1,6 @@
 // src/components/PaymentSuccessModal.jsx
 
-import '../../styles/PaymentSuccessModal.css'; // Crea este archivo CSS
+import styles from '../../styles/PaymentSuccessModal.module.css'; // Crea este archivo CSS
 
 export default function PaymentSuccessModal({ show, onClose, totalAmount }) {
   if (!show) {
@@ -8,14 +8,14 @@ export default function PaymentSuccessModal({ show, onClose, totalAmount }) {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close-button" onClick={onClose}>&times;</button>
+    <div className={styles['modal-overlay']}>
+      <div className={styles['modal-content']}>
+        <button className={styles['modal-close-button']} onClick={onClose}>&times;</button>
         <h2>¡Pago Confirmado!</h2>
-        <p>Tu pago por <strong className="highlight">{totalAmount} COL</strong> ha sido procesado exitosamente.</p>
+        <p>Tu pago por <strong className={styles.highlight}>{totalAmount} COL</strong> ha sido procesado exitosamente.</p>
         <p>Recibirás una confirmación en tu correo electrónico con los detalles de tu agendamiento.</p>
-        <div className="modal-actions">
-          <button className="btn-primary" onClick={onClose}>Entendido</button>
+        <div className={styles['modal-actions']}>
+          <button className={`${styles.btn} ${styles['btn-primary']}`} onClick={onClose}>Entendido</button>
         </div>
       </div>
     </div>

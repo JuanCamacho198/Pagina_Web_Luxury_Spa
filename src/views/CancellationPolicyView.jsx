@@ -1,14 +1,14 @@
 // src/views/CancellationPolicyView.jsx
 
 import Footer from './components/Footer';
-import '../styles/PolicyView.css';
+import styles from '../styles/PolicyView.module.css';
 
 
 export default function CancellationPolicyView() {
   return (
     <>
-      <main className="policy-container">
-        <section className="policy-banner">
+      <main className={styles['policy-container']}>
+        <section className={styles['policy-banner']}>
           <h1>Políticas de Cancelación y Reserva</h1>
           <h2>POLÍTICAS DE RESERVA, CANCELACIÓN Y DEVOLUCIÓN</h2>
           <h3>Estimado cliente, agradecemos que lea atentamente nuestras políticas para brindarle un mejor servicio.</h3>

@@ -5,7 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase/firebaseConfig';
 import { FiSettings } from 'react-icons/fi';
 import { collection, onSnapshot } from 'firebase/firestore'; 
-import '../../styles/NavBar.css';
+import styles from '../../styles/NavBar.module.css';
 
 export default function NavBar({ user }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,55 +36,55 @@ export default function NavBar({ user }) {
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-left">
-        <Link to="/" className="nav-logo-text">Luxury Spa</Link>
+    <nav className={styles.navbar}>
+      <div className={styles['nav-left']}>
+        <Link to="/" className={styles['nav-logo-text']}>Luxury Spa</Link>
       </div>
 
-      <div className="nav-center">
+      <div className={styles['nav-center']}>
         {!user ? (
           <>
-            <Link to="/services" className="nav-link">Servicios</Link>
-            <Link to="/sobre-nosotros" className="nav-link">Sobre Nosotros</Link>
-            <Link to="/contact" className="nav-link">Contacto</Link>
+            <Link to="/services" className={styles['nav-link']}>Servicios</Link>
+            <Link to="/sobre-nosotros" className={styles['nav-link']}>Sobre Nosotros</Link>
+            <Link to="/contact" className={styles['nav-link']}>Contacto</Link>
           </>
         ) : (
           <>
-            <Link to="/services" className="nav-link">Servicios</Link>
-            <Link to="/contact" className="nav-link">Contacto</Link>
-            <Link to="/citas" className="nav-link">Citas</Link>
+            <Link to="/services" className={styles['nav-link']}>Servicios</Link>
+            <Link to="/contact" className={styles['nav-link']}>Contacto</Link>
+            <Link to="/citas" className={styles['nav-link']}>Citas</Link>
           </>
         )}
       </div>
 
-      <div className="nav-right">
+      <div className={styles['nav-right']}>
         {!user ? (//vista para usario sin haber iniciado sesion
-          <>
-            <Link to="/login" className="nav-btn nav-btn-login">Iniciar Sesión</Link>
-            <Link to="/register" className="nav-btn nav-btn-register">Registrarse</Link>
+            <>
+            <Link to="/login" className={`${styles['nav-btn']} ${styles['nav-btn-login']}`}>Iniciar Sesión</Link>
+            <Link to="/register" className={`${styles['nav-btn']} ${styles['nav-btn-register']}`}>Registrarse</Link>
           </>
         ) : ( //vista para usario que ha iniciado sesion
-          <>
+            <>
             <button
-              className="cart-icon-button"
+              className={styles['cart-icon-button']}
               onClick={goToCart}
               aria-label={`Carrito con ${cartItemCount} ítems`}
               style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer', color: 'inherit' }}
             >
               🛒
               {cartItemCount > 0 && (
-                <span className="cart-count-badge">
+                <span className={styles['cart-count-badge']}>
                   {cartItemCount}
                 </span>
               )}
             </button>
 
-            <button className="settings-btn" onClick={() => setMenuOpen(o => !o)}>
+            <button className={styles['settings-btn']} onClick={() => setMenuOpen(o => !o)}>
               <FiSettings size={24} />
             </button>
 
             {menuOpen && (
-              <div className="settings-menu">
+              <div className={styles['settings-menu']}>
                 <Link to="/profile" onClick={() => setMenuOpen(false)}>Editar Perfil</Link>
                 <button onClick={handleLogout}>Cerrar Sesión</button>
               </div>

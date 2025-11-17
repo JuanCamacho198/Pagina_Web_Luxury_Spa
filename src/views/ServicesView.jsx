@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllServices } from '../controllers/servicesController';
 import Footer from './components/Footer';
-import '../styles/ServicesView.css';
+import styles from '../styles/ServicesView.module.css';
 
 export default function ServicesView() {
   const [services, setServices] = useState([]);
@@ -45,15 +45,15 @@ export default function ServicesView() {
     <>
       
 
-      <section className="services-page">
-        <h1 className="services-title" style={{alignItems: 'center'}}>Nuestros Servicios</h1>
+      <section className={styles['services-page']}>
+        <h1 className={styles['services-title']} style={{alignItems: 'center'}}>Nuestros Servicios</h1>
 
-        <div className="filter-sort-container">
-        <div className="filter-group">
-          <label className="filter-label">Categoría</label>
-          <div className="select-wrapper">
+        <div className={styles['filter-sort-container']}>
+        <div className={styles['filter-group']}>
+          <label className={styles['filter-label']}>Categoría</label>
+          <div className={styles['select-wrapper']}>
             <select 
-              className="custom-select" 
+              className={styles['custom-select']} 
               value={selectedCategory} 
               onChange={e => setSelectedCategory(e.target.value)}
             >
@@ -62,18 +62,18 @@ export default function ServicesView() {
               ))}
             </select>
           </div>
-          <div className="category-count">
+          <div className={styles['category-count']}>
             {selectedCategory === 'Todos'
               ? `${services.length} servicios disponibles`
               : `${filteredServices.length} servicio(s) en "${selectedCategory}"`}
           </div>
         </div>
 
-        <div className="filter-group">
-          <label className="filter-label">Ordenar Por</label>
-          <div className="select-wrapper">
+        <div className={styles['filter-group']}>
+          <label className={styles['filter-label']}>Ordenar Por</label>
+          <div className={styles['select-wrapper']}>
             <select 
-              className="custom-select" 
+              className={styles['custom-select']} 
               value={sortOption} 
               onChange={e => setSortOption(e.target.value)}
             >
@@ -86,25 +86,25 @@ export default function ServicesView() {
           </div>
         </div>
       </div>
-        <div className="services-grid">
+        <div className={styles['services-grid']}>
           {filteredServices.map(service => (
             <div
               key={service.id}
-              className="service-card-wrapper"
+              className={styles['service-card-wrapper']}
               onClick={() => goToServiceDetail(service.id)} 
               style={{ cursor: 'pointer' }} 
             >
-              <div className="service-card">
-                <div className="service-image-container">
+              <div className={styles['service-card']}>
+                <div className={styles['service-image-container']}>
                   <img
-                    className="service-image"
+                    className={styles['service-image']}
                     src={`/assets/${service.imageFileName}`}
                     alt={service.Nombre}
                   />
                 </div>
-                <div className="service-info">
-                  <h2 className="service-name">{service.Nombre}</h2>
-                  <p className="service-price">{service.Precio.toLocaleString('es-CO', {
+                <div className={styles['service-info']}>
+                  <h2 className={styles['service-name']}>{service.Nombre}</h2>
+                  <p className={styles['service-price']}>{service.Precio.toLocaleString('es-CO', {
                       style: 'currency',
                       currency: 'COP',
                       minimumFractionDigits: 0,
@@ -118,8 +118,8 @@ export default function ServicesView() {
         </div>
       </section>
 
-      <div className="info-background-section">
-        <div className="info-overlay">
+      <div className={styles['info-background-section']}>
+        <div className={styles['info-overlay']}>
           <h3>Abierto 24 horas Online</h3>
           <p>Nuestra tienda online está abierta 24 horas y 7 días de la semana</p>
           <p>Puedes elegir y pagar por WhatsApp en el <strong>+57 300 320 8295</strong></p>
@@ -132,7 +132,7 @@ export default function ServicesView() {
             href="https://wa.link/NUMERO_WHATSAPP"
             target="_blank"
             rel="noopener noreferrer"
-            className="whatsapp-button"
+            className={styles['whatsapp-button']}
           >
             Ir a WhatsApp
           </a>

@@ -9,7 +9,7 @@ import {
 } from '../../controllers/userController';
 import { auth, db } from '../../firebase/firebaseConfig';
 import { signOut } from 'firebase/auth';
-import '../../styles/ProfileView.css';
+import styles from '../../styles/ProfileView.module.css';
 
 export default function ProfileView() {
   const [profile, setProfile] = useState(null);
@@ -160,18 +160,18 @@ export default function ProfileView() {
     }).format(amount);
   };
 
-  if (error) return <p className="error">{error}</p>;
-  if (!profile) return <p className="loading">Cargando perfil…</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
+  if (!profile) return <p className={styles.loading}>Cargando perfil…</p>;
 
   return (
-    <div className="profile-view">
+    <div className={styles['profile-view']}>
       {/* Notificaciones */}
       {notification && (
-        <div className={`notification notification-${notification.type}`}>
-          <div className="notification-content">
-            <span className="notification-message">{notification.message}</span>
+        <div className={`${styles.notification} ${styles['notification-' + notification.type]}`}>
+          <div className={styles['notification-content']}>
+            <span className={styles['notification-message']}>{notification.message}</span>
             <button 
-              className="notification-close" 
+              className={styles['notification-close']} 
               onClick={() => setNotification(null)}
             >
               ×
@@ -181,35 +181,35 @@ export default function ProfileView() {
       )}
 
       {/* Header del perfil */}
-      <div className="profile-header">
-        <div className="profile-avatar">
-          <div className="avatar-circle">
+      <div className={styles['profile-header']}>
+        <div className={styles['profile-avatar']}>
+          <div className={styles['avatar-circle']}>
             {profile.nombre ? profile.nombre.charAt(0).toUpperCase() : 'U'}
           </div>
         </div>
-        <div className="profile-info">
-          <h1 className="profile-name">{profile.nombre} {profile.apellido}</h1>
-          <p className="profile-email">{profile.email}</p>
+        <div className={styles['profile-info']}>
+          <h1 className={styles['profile-name']}>{profile.nombre} {profile.apellido}</h1>
+          <p className={styles['profile-email']}>{profile.email}</p>
         </div>
       </div>
 
       {/* Navegación por pestañas */}
-      <div className="profile-tabs">
+      <div className={styles['profile-tabs']}>
         <button 
-          className={`tab ${activeTab === 'personal' ? 'active' : ''}`}
+          className={`${styles.tab} ${activeTab === 'personal' ? styles.active : ''}`}
           onClick={() => setActiveTab('personal')}
         >
           📝 Información Personal
         </button>
 
         <button 
-          className={`tab ${activeTab === 'favoritos' ? 'active' : ''}`}
+          className={`${styles.tab} ${activeTab === 'favoritos' ? styles.active : ''}`}
           onClick={() => setActiveTab('favoritos')}
         >
           ❤️ En mi Carrito
         </button>
         <button 
-          className={`tab ${activeTab === 'configuracion' ? 'active' : ''}`}
+          className={`${styles.tab} ${activeTab === 'configuracion' ? styles.active : ''}`}
           onClick={() => setActiveTab('configuracion')}
         >
           ⚙️ Configuración
@@ -217,15 +217,15 @@ export default function ProfileView() {
       </div>
 
       {/* Contenido de las pestañas */}
-      <div className="tab-content">
+      <div className={styles['tab-content']}>
         {activeTab === 'personal' && (
-          <div className="personal-info">
+          <div className={styles['personal-info']}>
             <h2>Información Personal</h2>
-            <div className="profile-fields">
+            <div className={styles['profile-fields']}>
               {['nombre', 'apellido', 'telefono'].map((field) => (
-                <div key={field} className="profile-field">
+                <div key={field} className={styles['profile-field']}>
                   {editingField === field ? (
-                    <div className="edit-mode">
+                    <div className={styles['edit-mode']}>
                       <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
                       <input
                         name={field}
@@ -233,18 +233,18 @@ export default function ProfileView() {
                         onChange={handleChange}
                         placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                       />
-                      <div className="edit-actions">
-                        <button className="save-btn" onClick={() => handleSave(field)}>Guardar</button>
-                        <button className="cancel-btn" onClick={() => setEditingField(null)}>Cancelar</button>
+                      <div className={styles['edit-actions']}>
+                        <button className={styles['save-btn']} onClick={() => handleSave(field)}>Guardar</button>
+                        <button className={styles['cancel-btn']} onClick={() => setEditingField(null)}>Cancelar</button>
                       </div>
                     </div>
                   ) : (
-                    <div className="field-display">
-                      <div className="field-info">
+                    <div className={styles['field-display']}>
+                      <div className={styles['field-info']}>
                         <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
                         <span>{profile[field] || 'No especificado'}</span>
                       </div>
-                      <button className="edit-btn" onClick={() => setEditingField(field)}>
+                      <button className={styles['edit-btn']} onClick={() => setEditingField(field)}>
                         ✏️ Editar
                       </button>
                     </div>
@@ -253,13 +253,13 @@ export default function ProfileView() {
               ))}
               
               {/* Email (no editable) */}
-              <div className="profile-field email-field">
-                <div className="field-display">
-                  <div className="field-info">
+              <div className={styles['profile-field']}>
+                <div className={styles['field-display']}>
+                  <div className={styles['field-info']}>
                     <label>Email:</label>
                     <span>{profile.email}</span>
                   </div>
-                  <span className="email-notice">📧 No editable</span>
+                  <span className={styles['email-notice']}>📧 No editable</span>
                 </div>
               </div>
             </div>
@@ -268,22 +268,22 @@ export default function ProfileView() {
 
 
         {activeTab === 'favoritos' && (
-          <div className="favorite-services">
+          <div className={styles['favorite-services']}>
             <h2>Servicios en mi Carrito</h2>
             {favoriteServices.length > 0 ? (
-              <div className="services-list">
+              <div className={styles['services-list']}>
                 {favoriteServices.map((service) => (
-                  <div key={service.id} className="service-card-mini">
-                    <div className="service-info">
+                  <div key={service.id} className={styles['service-card-mini']}>
+                    <div className={styles['service-info']}>
                       <h4>{service.Nombre}</h4>
-                      <p className="service-price">{formatCurrency(service.Precio)}</p>
+                      <p className={styles['service-price']}>{formatCurrency(service.Precio)}</p>
                       {service.Duracion && (
-                        <p className="service-duration">{service.Duracion} minutos</p>
+                        <p className={styles['service-duration']}>{service.Duracion} minutos</p>
                       )}
                     </div>
                     <button 
                       onClick={() => navigate(`/servicio/${service.serviceId}`)}
-                      className="view-service-btn"
+                      className={styles['view-service-btn']}
                     >
                       Ver Detalles
                     </button>
@@ -291,9 +291,9 @@ export default function ProfileView() {
                 ))}
               </div>
             ) : (
-              <div className="empty-state">
+              <div className={styles['empty-state']}>
                 <p>🛒 Tu carrito está vacío.</p>
-                <button onClick={() => navigate('/servicios')} className="btn-primary">
+                <button onClick={() => navigate('/servicios')} className={styles['btn-primary']}>
                   Explorar Servicios
                 </button>
               </div>

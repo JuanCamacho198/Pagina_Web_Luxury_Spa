@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, addDoc, getDocs } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebaseConfig';
 import { useCart } from '../../context/CartContext';
-import '../../styles/ServiceDetailView.css';
+import styles from '../../styles/ServiceDetailView.module.css';
 
 const ServiceDetailView = () => {
   const { id } = useParams();
@@ -110,11 +110,11 @@ const ServiceDetailView = () => {
     <>
       {/* Componente de Notificación */}
       {notification && (
-        <div className={`notification notification-${notification.type}`}>
-          <div className="notification-content">
-            <span className="notification-message">{notification.message}</span>
+        <div className={`${styles.notification} ${styles['notification-' + notification.type]}`}>
+          <div className={styles['notification-content']}>
+            <span className={styles['notification-message']}>{notification.message}</span>
             <button 
-              className="notification-close" 
+              className={styles['notification-close']} 
               onClick={() => setNotification(null)}
               aria-label="Cerrar notificación"
             >
@@ -124,21 +124,21 @@ const ServiceDetailView = () => {
         </div>
       )}
 
-      <div className="service-detail">
-        <h2 className="service-detail-title">{service.Nombre}</h2>
+      <div className={styles['service-detail']}>
+        <h2 className={styles['service-detail-title']}>{service.Nombre}</h2>
 
-        <div className="service-detail-content">
+        <div className={styles['service-detail-content']}>
           {/* Sección izquierda */}
-          <div className="service-detail-left">
-            <div className="service-detail-image-container">
+          <div className={styles['service-detail-left']}>
+            <div className={styles['service-detail-image-container']}>
               {service.imagenURL && (
-                <img src={service.imagenURL} alt={service.Nombre} className="service-detail-image" />
+                <img src={service.imagenURL} alt={service.Nombre} className={styles['service-detail-image']} />
               )}
             </div>
 
-            <div className="service-detail-info">
+            <div className={styles['service-detail-info']}>
               {typeof service.Precio === 'number' ? (
-                <p className="service-detail-price">
+                <p className={styles['service-detail-price']}>
                   Precio: {service.Precio.toLocaleString('es-CO', {
                     style: 'currency',
                     currency: 'COP',
@@ -147,25 +147,25 @@ const ServiceDetailView = () => {
                   })}
                 </p>
               ) : (
-                <p className="service-detail-price">Precio no disponible</p>
+                <p className={styles['service-detail-price']}>Precio no disponible</p>
               )}
 
               {service.Duracion && (
-                <p className="service-detail-duration">Duración: {service.Duracion} minutos</p>
+                <p className={styles['service-detail-duration']}>Duración: {service.Duracion} minutos</p>
               )}
 
-              <div className="service-detail-buttons">
-                <button className="service-detail-buy-btn" onClick={handleBuyNow}>
+              <div className={styles['service-detail-buttons']}>
+                <button className={styles['service-detail-buy-btn']} onClick={handleBuyNow}>
                   Comprar Ahora
                 </button>
                 <button 
-                  className={`service-detail-cart-btn ${isAddingToCart ? 'adding' : ''}`}
+                  className={`${styles['service-detail-cart-btn']} ${isAddingToCart ? styles.adding : ''}`}
                   onClick={handleAddToCart}
                   disabled={isAddingToCart}
                 >
                   {isAddingToCart ? (
                     <>
-                      <span className="loading-spinner"></span>
+                      <span className={styles['loading-spinner']}></span>
                       Añadiendo...
                     </>
                   ) : (
@@ -177,16 +177,16 @@ const ServiceDetailView = () => {
           </div>
 
           {/* Sección derecha */}
-          <div className="service-detail-right">
+          <div className={styles['service-detail-right']}>
             {service.descripcionDetallada && (
-              <div className="service-detail-description">
+              <div className={styles['service-detail-description']}>
                 <h3>Descripción Detallada</h3>
                 <p>{service.descripcionDetallada}</p>
               </div>
             )}
 
             {service.incluye?.length > 0 && (
-              <div className="service-detail-includes">
+              <div className={styles['service-detail-includes']}>
                 <h3>¿Qué incluye?</h3>
                 <ul>
                   {service.incluye.map((item, index) => (
@@ -197,7 +197,7 @@ const ServiceDetailView = () => {
             )}
 
             {service.beneficios?.length > 0 && (
-              <div className="service-detail-benefits">
+              <div className={styles['service-detail-benefits']}>
                 <h3>Beneficios</h3>
                 <ul>
                   {service.beneficios.map((beneficio, index) => (
@@ -211,13 +211,13 @@ const ServiceDetailView = () => {
       </div>
 
       {recommendedServices.length > 0 && (
-        <div className="recommended-services">
+        <div className={styles['recommended-services']}>
           <h3>También te puede interesar:</h3>
-          <div className="recommended-services-list">
+          <div className={styles['recommended-services-list']}>
             {recommendedServices.map((s) => (
-              <div key={s.id} className="recommended-service-card" onClick={() => navigate(`/servicio/${s.id}`)}>
+              <div key={s.id} className={styles['recommended-service-card']} onClick={() => navigate(`/servicio/${s.id}`)}>
                 {s.imagenURL && (
-                  <img src={s.imagenURL} alt={s.Nombre} className="recommended-service-image" />
+                  <img src={s.imagenURL} alt={s.Nombre} className={styles['recommended-service-image']} />
                 )}
                 <h4>{s.Nombre}</h4>
                 <p>

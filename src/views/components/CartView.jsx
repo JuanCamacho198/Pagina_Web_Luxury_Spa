@@ -4,7 +4,7 @@ import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../firebase/firebaseConfig'; 
 import { collection, getDocs } from 'firebase/firestore';
-import '../../styles/CartView.css';
+import styles from '../../styles/CartView.module.css';
 
 export default function CartView() {
   const { removeItem, clearCart } = useCart();
@@ -85,9 +85,9 @@ export default function CartView() {
 
   if (loading) {
     return (
-      <div className="cart-page">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
+      <div className={styles['cart-page']}>
+        <div className={styles['loading-container']}>
+          <div className={styles['loading-spinner']}></div>
           <p>Cargando carrito...</p>
         </div>
       </div>
@@ -95,24 +95,24 @@ export default function CartView() {
   }
 
   return (
-    <div className="cart-page">
-      <div className="cart-header">
+    <div className={styles['cart-page']}>
+      <div className={styles['cart-header']}>
         <h1>Tu Carrito</h1>
-        <div className="cart-counter">
-          <span className="counter-badge">{itemCount}</span>
-          <span className="counter-text">
+        <div className={styles['cart-counter']}>
+          <span className={styles['counter-badge']}>{itemCount}</span>
+          <span className={styles['counter-text']}>
             {itemCount === 1 ? 'servicio' : 'servicios'}
           </span>
         </div>
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="empty-cart">
-          <div className="empty-cart-icon">🛒</div>
+        <div className={styles['empty-cart']}>
+          <div className={styles['empty-cart-icon']}>🛒</div>
           <h2>Tu carrito está vacío</h2>
           <p>¡Descubre nuestros increíbles servicios y añade algunos a tu carrito!</p>
           <button 
-            className="btn btn-primary explore-btn"
+            className={`${styles.btn} ${styles['btn-primary']} ${styles['explore-btn']}`}
             onClick={() => navigate('/services')}
           >
             Explorar Servicios
@@ -126,29 +126,29 @@ export default function CartView() {
             </div>
             <div className="cart-items-list">
               {Object.values(groupedItems).map(item => (
-                <div key={item.id + item.Nombre} className="cart-item-card">
-                  <div className="item-image">
+                <div key={item.id + item.Nombre} className={styles['cart-item-card']}>
+                  <div className={styles['item-image']}>
                     {item.imageFileName ? (
                       <img src={item.imageFileName} alt={item.Nombre} />
                     ) : (
-                      <div className="placeholder-image">
+                      <div className={styles['placeholder-image']}>
                         <span>📋</span>
                       </div>
                     )}
                   </div>
                   
-                  <div className="item-details">
+                  <div className={styles['item-details']}>
                     <h3>{item.Nombre}</h3>
-                    <div className="item-info">
-                      <span className="price">${parseFloat(item.Precio || 0).toLocaleString('es-CO')} COP</span>
+                    <div className={styles['item-info']}>
+                      <span className={styles.price}>${parseFloat(item.Precio || 0).toLocaleString('es-CO')} COP</span>
                       {item.Duracion && (
-                        <span className="duration">⏱️ {item.Duracion} min</span>
+                        <span className={styles.duration}>⏱️ {item.Duracion} min</span>
                       )}
                     </div>
                     {item.quantity > 1 && (
-                      <div className="quantity-info">
-                        <span className="quantity-badge">x{item.quantity}</span>
-                        <span className="subtotal">
+                      <div className={styles['quantity-info']}>
+                        <span className={styles['quantity-badge']}>x{item.quantity}</span>
+                        <span className={styles.subtotal}>
                           Subtotal: ${(parseFloat(item.Precio || 0) * item.quantity).toLocaleString('es-CO')} COP
                         </span>
                       </div>
@@ -156,15 +156,15 @@ export default function CartView() {
                   </div>
 
                   <button
-                    className={`remove-item-btn ${removing === item.id ? 'removing' : ''}`}
+                    className={`${styles['remove-item-btn']} ${removing === item.id ? styles.removing : ''}`}
                     onClick={() => handleRemoveItem(item)}
                     disabled={removing === item.id}
                   >
                     {removing === item.id ? (
-                      <span className="loading-text">Eliminando...</span>
+                      <span className={styles['loading-text']}>Eliminando...</span>
                     ) : (
                       <>
-                        <span className="remove-icon">🗑️</span>
+                        <span className={styles['remove-icon']}>🗑️</span>
                         Eliminar
                       </>
                     )}
@@ -190,17 +190,17 @@ export default function CartView() {
               
               <div className="summary-actions">
                 <button 
-                  className="btn btn-primaryC checkout-btn" 
+                  className={`${styles.btn} ${styles['btn-primaryC']} ${styles['checkout-btn']}`} 
                   onClick={handleCheckout}
                 >
-                  <span className="btn-icon">💳</span>
+                  <span className={styles['btn-icon']}>💳</span>
                   Proceder al Pago
                 </button>
                 <button
-                  className="btn btn-secondaryV clear-btn"
+                  className={`${styles.btn} ${styles['btn-secondaryV']} ${styles['clear-btn']}`}
                   onClick={handleClearCart}
                 >
-                  <span className="btn-icon">🗑️</span>
+                  <span className={styles['btn-icon']}>🗑️</span>
                   Vaciar Carrito
                 </button>
               </div>

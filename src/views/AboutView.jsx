@@ -1,11 +1,10 @@
 // src/views/AboutView.jsx
+import aboutStyles from './../styles/AboutView.module.css';
 
-import './../styles/AboutView.css';
-//sobre nosotros
 export default function AboutView() {
   return (
-    <div className="about-container">
-      <div className="about-banner">
+    <div className={aboutStyles['about-container']}>
+      <div className={aboutStyles['about-banner']}>
         <h1>¿Quiénes Somos?</h1>
         <p>
           En <strong>Luxury Spa</strong>, nos dedicamos a ofrecer un servicio integral de calidad en relajación, vitalidad,
@@ -16,7 +15,7 @@ export default function AboutView() {
           y confianza, buscando siempre superar las expectativas de nuestros clientes y promover su bienestar
           físico y emocional.
         </p>
-        <a href="/contacto" className="btn">Contáctanos</a>
+        <a href="/contacto" className={aboutStyles.btn}>Contáctanos</a>
       </div>
     </div>
   );

@@ -1,14 +1,14 @@
 // src/views/FaqView.jsx
 
 import Footer from './components/Footer';
-import '../styles/PolicyView.css';
+import styles from '../styles/PolicyView.module.css';
 
 //preguntas frecuentes
 export default function FaqView() {
   return (
     <>
-      <main className="policy-container">
-        <section className="policy-banner">
+      <main className={styles['policy-container']}>
+        <section className={styles['policy-banner']}>
           <h1>Preguntas Frecuentes</h1>
 
           <h3>¿Qué incluye mi ritual o experiencia?</h3>

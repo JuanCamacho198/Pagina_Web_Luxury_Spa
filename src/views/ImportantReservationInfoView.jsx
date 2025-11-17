@@ -1,13 +1,13 @@
 // src/views/ImportantReservationInfoView.jsx
 
 import Footer from './components/Footer';
-import '../styles/PolicyView.css';
+import styles from '../styles/PolicyView.module.css';
 
 export default function ImportantReservationInfoView() {
   return (
     <>
-      <main className="policy-container">
-        <section className="policy-banner">
+      <main className={styles['policy-container']}>
+        <section className={styles['policy-banner']}>
           <h1>Información Importante para su Reserva</h1>
           <p>
             Si usted no es quien asiste, agradecemos hacer llegar esta información a <strong>TODAS</strong> las personas que asistirán.

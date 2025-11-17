@@ -1,13 +1,13 @@
 // src/views/DataPrivacyPolicyView.jsx
 
 import Footer from './components/Footer';
-import '../styles/PolicyView.css';
+import styles from '../styles/PolicyView.module.css';
 
 export default function DataPrivacyPolicyView() {
   return (
     <>
-      <main className="policy-container">
-        <section className="policy-banner">
+      <main className={styles['policy-container']}>
+        <section className={styles['policy-banner']}>
           <h1>Política de Tratamiento de Datos Personales</h1>
           <h2>AVISO DE PRIVACIDAD</h2>
           <p>

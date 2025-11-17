@@ -1,20 +1,19 @@
 // src/views/HomeView.jsx
-import React from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from './components/Footer';
 import { fetchServices } from '../models/servicesModel';
-import '../styles/HomeView.css';
-import '../styles/footer.css'
+import styles from '../styles/HomeView.module.css';
 
 //inicio
 function HomeView() {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
   const totalImages = 3;
-  const [services, setServices] = React.useState([]);
+  const [services, setServices] = useState([]);
 
 
-  React.useEffect(() => {
+  useEffect(() => {
   async function loadServices() {
     const data = await fetchServices();
     setServices(data);
@@ -22,7 +21,7 @@ function HomeView() {
     loadServices();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % totalImages);
     }, 4000); // Cambia cada 4 segundos
@@ -40,58 +39,58 @@ function HomeView() {
 
   return (
     <>
-    <div className='home-container'>
+    <div className={styles['home-container']}>
 
-      <section className="hero-section">
-        <div className="hero-text">
+      <section className={styles['hero-section']}>
+        <div className={styles['hero-text']}>
           <h1>¡Bienvenido a Luxury Spa!</h1>
           <h2>Un oasis de relajación en Medellín</h2>
           <p>Descubre una experiencia única de bienestar y belleza. Reserva hoy y consiéntete como nunca antes.</p>
-          <div className="hero-buttons">
-            <button className="primary-btn">Conócenos</button>
-            <button className="secondary-btn">Ver Servicios</button>
+          <div className={styles['hero-buttons']}>
+            <button className={styles['primary-btn']}>Conócenos</button>
+            <button className={styles['secondary-btn']}>Ver Servicios</button>
           </div>
         </div>
-        <div className="hero-image"></div>
+        <div className={styles['hero-image']}></div>
       </section>
 
-      <section className="info-section">
+      <section className={styles['info-section']}>
         <h3>¿Por qué elegirnos?</h3>
         <p>En Luxury Spa nos dedicamos a ofrecer tratamientos de alta calidad que revitalizan cuerpo, mente y espíritu, en un ambiente de completa tranquilidad.</p>
       </section>
 
-      <section className="carousel-section">
-        <div className="carousel-container">
-          <div className="carousel-images">
+      <section className={styles['carousel-section']}>
+        <div className={styles['carousel-container']}>
+          <div className={styles['carousel-images']}>
             {[1, 2, 3].map((index) => (
               <img
                 key={index}
                 src={`/assets/carrusel${index}.jpg`}
                 alt={`Imagen ${index}`}
-                className="carousel-image"
+                className={styles['carousel-image']}
                 style={{ transform: `translateX(calc(-100% * ${activeIndex}))` }}
               />
             ))}
           </div>
-          <button className="carousel-btn prev-btn" onClick={handlePrev}>&lt;</button>
-          <button className="carousel-btn next-btn" onClick={handleNext}>&gt;</button>
+          <button className={styles['carousel-btn']} onClick={handlePrev}>{'<'}</button>
+          <button className={styles['carousel-btn']} onClick={handleNext}>{'>'}</button>
         </div>
       </section>
 
-      <section className="recommended-section">
+      <section className={styles['recommended-section']}>
         <h3>Productos Destacados</h3>
-        <div className="recommended-services-list">
+        <div className={styles['recommended-services-list']}>
           {services.slice(0, 3).map((s) => (
             <div
               key={s.id}
-              className="recommended-service-card"
+              className={styles['recommended-service-card']}
               onClick={() => navigate(`/servicio/${s.id}`)}
             >
               {s.imagenURL && (
                 <img
                   src={s.imagenURL}
                   alt={s.Nombre}
-                  className="recommended-service-image"
+                  className={styles['recommended-service-image']}
                 />
               )}
               <h4>{s.Nombre}</h4>

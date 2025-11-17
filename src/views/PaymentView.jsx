@@ -1,7 +1,7 @@
 // src/views/PaymentView.jsx
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import '../styles/PaymentView.css';
+import styles from '../styles/PaymentView.module.css';
 import PaymentSuccessModal from '../views/components/PaymentSuccessModal'; // Importa el modal
 
 // --- IMPORTAR IMÁGENES DESDE ASSETS ---
@@ -99,34 +99,34 @@ export default function PaymentView() {
   };
 
 
-  if (loading) return <p className="loading">Cargando página de pago…</p>;
+  if (loading) return <p className={styles.loading}>Cargando página de pago…</p>;
 
   if (!appointmentIds || !Array.isArray(appointmentIds) || appointmentIds.length === 0 || totalAmount === undefined || totalAmount === null) {
-    return <p className="error">Información de la orden no disponible. Por favor, intenta de nuevo desde el carrito o servicios.</p>;
+    return <p className={styles.error}>Información de la orden no disponible. Por favor, intenta de nuevo desde el carrito o servicios.</p>;
   }
 
-  if (error && !selectedPaymentMethod && !loading) {
-      return <p className="error">{error}</p>;
-  }
+    if (error && !selectedPaymentMethod && !loading) {
+      return <p className={styles.error}>{error}</p>;
+    }
 
   return (
-    <div className="payment-page">
+    <div className={styles['payment-page']}>
       <h1>Confirmar y Pagar</h1>
 
-      <div className="payment-summary">
+      <div className={styles['payment-summary']}>
         <h2>Resumen del Pedido</h2>
         <p><strong>Número de Servicios ({appointmentIds.length})</strong></p>
         <p><strong>Total a Pagar:</strong> {totalAmount} COL</p>
       </div>
 
-      <div className="payment-methods-selection">
+      <div className={styles['payment-methods-selection']}>
         <h2>Selecciona un Método de Pago</h2>
-        <div className="payment-methods-container">
+        <div className={styles['payment-methods-container']}>
           {AVAILABLE_PAYMENT_METHODS.map((method) => (
             <label
               key={method.id}
               htmlFor={method.id}
-              className={`payment-method-option ${selectedPaymentMethod === method.id ? 'selected' : ''}`}
+              className={`${styles['payment-method-option']} ${selectedPaymentMethod === method.id ? styles.selected : ''}`}
             >
               <input
                 type="radio"
@@ -137,19 +137,19 @@ export default function PaymentView() {
                 onChange={handlePaymentMethodChange}
                 style={{ display: 'none' }}
               />
-              <div className="payment-method-content">
-                <img src={method.image} alt={method.name} className="payment-method-image" />
-                <span className="payment-method-name">{method.name}</span>
+              <div className={styles['payment-method-content']}>
+                <img src={method.image} alt={method.name} className={styles['payment-method-image']} />
+                <span className={styles['payment-method-name']}>{method.name}</span>
               </div>
             </label>
           ))}
         </div>
       </div>
 
-      {error && <p className="error" style={{ marginTop: '1rem', color: 'red' }}>{error}</p>}
+      {error && <p className={styles.error} style={{ marginTop: '1rem', color: 'red' }}>{error}</p>}
 
       <button
-        className="btn btn-primary"
+        className={`${styles.btn} ${styles['btn-primary']}`}
         onClick={handlePaymentSubmit}
         disabled={!selectedPaymentMethod || loading}
         style={{ width: '100%', marginTop: '1.5rem' }}

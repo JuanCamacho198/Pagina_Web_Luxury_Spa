@@ -5,7 +5,7 @@ import {
   fetchAppointments,
   deleteAppointment
 } from '../models/citasModel';
-import '../styles/CitasView.css';
+import styles from '../styles/CitasView.module.css';
 
 export default function CitasView() {
   const [citas, setCitas] = useState([]);
@@ -76,7 +76,7 @@ export default function CitasView() {
   const getAppointmentStatus = (cita) => {
     const now = new Date();
     const appointmentDate = new Date(cita.appointmentDate + ' ' + (cita.appointmentTime || '00:00'));
-    
+
     if (appointmentDate < now) {
       return { status: 'completada', label: 'Completada', color: '#28a745' };
     } else if (appointmentDate.toDateString() === now.toDateString()) {
@@ -88,10 +88,10 @@ export default function CitasView() {
 
   if (loading) {
     return (
-      <div className="citas-page">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p className="loading-text">Cargando tus citas...</p>
+      <div className={styles['citas-page']}>
+        <div className={styles['loading-container']}>
+          <div className={styles['loading-spinner']}></div>
+          <p className={styles['loading-text']}>Cargando tus citas...</p>
         </div>
       </div>
     );
@@ -99,12 +99,12 @@ export default function CitasView() {
 
   if (error) {
     return (
-      <div className="citas-page">
-        <div className="error-container">
-          <div className="error-icon">⚠️</div>
+      <div className={styles['citas-page']}>
+        <div className={styles['error-container']}>
+          <div className={styles['error-icon']}>⚠️</div>
           <h2>Error al cargar las citas</h2>
           <p>{error}</p>
-          <button onClick={() => window.location.reload()} className="retry-btn">
+          <button onClick={() => window.location.reload()} className={styles['retry-btn']}>
             Intentar de nuevo
           </button>
         </div>
@@ -114,14 +114,14 @@ export default function CitasView() {
 
   if (!citas.length) {
     return (
-      <div className="citas-page">
-        <div className="empty-state">
-          <div className="empty-icon">📅</div>
+      <div className={styles['citas-page']}>
+        <div className={styles['empty-state']}>
+          <div className={styles['empty-icon']}>📅</div>
           <h2>No tienes citas agendadas</h2>
           <p>Cuando tengas citas programadas, aparecerán aquí.</p>
-          <button 
-            onClick={() => window.location.href = '/servicios'} 
-            className="btn-primary"
+          <button
+            onClick={() => window.location.href = '/servicios'}
+            className={styles['btn-primary']}
           >
             Explorar Servicios
           </button>
@@ -131,14 +131,14 @@ export default function CitasView() {
   }
 
   return (
-    <section className="citas-page">
+    <section className={styles['citas-page']}>
       {/* Notificaciones */}
       {notification && (
-        <div className={`notification notification-${notification.type}`}>
-          <div className="notification-content">
-            <span className="notification-message">{notification.message}</span>
-            <button 
-              className="notification-close" 
+        <div className={`${styles.notification} ${styles['notification-' + notification.type]}`}>
+          <div className={styles['notification-content']}>
+            <span className={styles['notification-message']}>{notification.message}</span>
+            <button
+              className={styles['notification-close']}
               onClick={() => setNotification(null)}
             >
               ×
@@ -148,74 +148,74 @@ export default function CitasView() {
       )}
 
       {/* Header */}
-      <div className="citas-header">
+      <div className={styles['citas-header']}>
         <h1>Mis Citas Agendadas</h1>
-        <div className="citas-stats">
-          <div className="stat-item">
-            <span className="stat-number">{citas.length}</span>
-            <span className="stat-label">Total</span>
+        <div className={styles['citas-stats']}>
+          <div className={styles['stat-item']}>
+            <span className={styles['stat-number']}>{citas.length}</span>
+            <span className={styles['stat-label']}>Total</span>
           </div>
-          <div className="stat-item">
-            <span className="stat-number">
+          <div className={styles['stat-item']}>
+            <span className={styles['stat-number']}>
               {citas.filter(cita => getAppointmentStatus(cita).status === 'programada').length}
             </span>
-            <span className="stat-label">Próximas</span>
+            <span className={styles['stat-label']}>Próximas</span>
           </div>
         </div>
       </div>
 
       {/* Grid de citas */}
-      <div className="citas-grid">
+      <div className={styles['citas-grid']}>
         {citas.map(cita => {
           const status = getAppointmentStatus(cita);
           return (
-            <article key={cita.id} className={`cita-card ${status.status}`}>
-              <div className="cita-status-badge" style={{ backgroundColor: status.color }}>
+            <article key={cita.id} className={`${styles['cita-card']} ${styles[status.status]}`}>
+              <div className={styles['cita-status-badge']} style={{ backgroundColor: status.color }}>
                 {status.label}
               </div>
-              
-              <header className="cita-header">
-                <div className="service-info">
-                  <h3 className="service-name">{cita.serviceName || 'Servicio Desconocido'}</h3>
+
+              <header className={styles['cita-header']}>
+                <div className={styles['service-info']}>
+                  <h3 className={styles['service-name']}>{cita.serviceName || 'Servicio Desconocido'}</h3>
                   {cita.createdAt && (
-                    <time className="cita-created">
+                    <time className={styles['cita-created']}>
                       Reservada el {formatDate(cita.createdAt)}
                     </time>
                   )}
                 </div>
               </header>
 
-              <div className="cita-details">
-                
-                <div className="detail-row">
-                  <div className="detail-icon">📅</div>
-                  <div className="detail-content">
-                    <span className="detail-label">Fecha</span>
-                    <span className="detail-value">{cita.appointmentDate}</span>
+              <div className={styles['cita-details']}>
+
+                <div className={styles['detail-row']}>
+                  <div className={styles['detail-icon']}>📅</div>
+                  <div className={styles['detail-content']}>
+                    <span className={styles['detail-label']}>Fecha</span>
+                    <span className={styles['detail-value']}>{cita.appointmentDate}</span>
                   </div>
                 </div>
 
                 {cita.appointmentTime && (
-                  <div className="detail-row">
-                    <div className="detail-icon">🕒</div>
-                    <div className="detail-content">
-                      <span className="detail-label">Hora</span>
-                      <span className="detail-value">{cita.appointmentTime}</span>
+                  <div className={styles['detail-row']}>
+                    <div className={styles['detail-icon']}>🕒</div>
+                    <div className={styles['detail-content']}>
+                      <span className={styles['detail-label']}>Hora</span>
+                      <span className={styles['detail-value']}>{cita.appointmentTime}</span>
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="cita-actions">
+              <div className={styles['cita-actions']}>
                 {status.status !== 'completada' && (
-                  <button 
-                    className="btn-cancel" 
+                  <button
+                    className={styles['btn-cancel']}
                     onClick={() => setModalId(cita.id)}
                     disabled={cancelingId === cita.id}
                   >
                     {cancelingId === cita.id ? (
                       <>
-                        <span className="loading-spinner-small"></span>
+                        <span className={styles['loading-spinner-small']}></span>
                         Cancelando...
                       </>
                     ) : (
@@ -233,20 +233,20 @@ export default function CitasView() {
 
       {/* Modal de confirmación */}
       {modalId && (
-        <div className="modal-backdrop" onClick={cancelModal}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-icon">⚠️</div>
+        <div className={styles['modal-backdrop']} onClick={cancelModal}>
+          <div className={styles.modal} onClick={e => e.stopPropagation()}>
+            <div className={styles['modal-icon']}>⚠️</div>
             <h2>¿Cancelar cita?</h2>
             <p>¿Estás seguro que deseas cancelar esta cita? Esta acción no se puede deshacer.</p>
-            <div className="modal-actions">
-              <button 
-                onClick={confirmCancel} 
-                className="btn-confirm"
+            <div className={styles['modal-actions']}>
+              <button
+                onClick={confirmCancel}
+                className={styles['btn-confirm']}
                 disabled={cancelingId === modalId}
               >
                 {cancelingId === modalId ? 'Cancelando...' : 'Sí, cancelar'}
               </button>
-              <button onClick={cancelModal} className="btn-secondary">
+              <button onClick={cancelModal} className={styles['btn-secondary']}>
                 No, mantener
               </button>
             </div>

@@ -5,7 +5,7 @@ import { fetchServiceById } from '../../models/servicesModel';
 import { addAppointment } from '../../models/citasModel';
 import { useCart } from '../../context/CartContext';
 import { useMemo } from 'react';
-import '../../styles/CheckoutView.css';
+import styles from '../../styles/CheckoutView.module.css';
 import TimePicker from './TimePicker';
 
 export default function CheckoutView() {
@@ -186,51 +186,51 @@ export default function CheckoutView() {
     }
   };
 
-  if (error && !isSubmitting) return <p className="error">{error}</p>;
-  if (loading) return <p className="loading">Cargando detalles del servicio…</p>;
-  if (isSubmitting) return <p className="loading">Procesando compra...</p>;
+  if (error && !isSubmitting) return <p className={styles.error}>{error}</p>;
+  if (loading) return <p className={styles.loading}>Cargando detalles del servicio…</p>;
+  if (isSubmitting) return <p className={styles.loading}>Procesando compra...</p>;
 
   return (
-    <div className="checkout-page">
+    <div className={styles['checkout-page']}>
       <h1>Completar Compra</h1>
-      <div className="checkout-content">
-        <form className="scheduling-form" onSubmit={handleSubmit}>
+      <div className={styles['checkout-content']}>
+        <form className={styles['scheduling-form']} onSubmit={handleSubmit}>
           <h2>Datos de Agendamiento</h2>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles['form-row']}>
+            <div className={styles['form-group']}>
               <label htmlFor="name">Nombre:</label>
               <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="lastName">Apellido:</label>
               <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles['form-row']}>
+            <div className={styles['form-group']}>
               <label htmlFor="userCC">CC:</label>
               <input type="text" id="userCC" name="userCC" value={formData.userCC} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="phone">Teléfono:</label>
               <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
           </div>
 
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required disabled={isSubmitting} />
           </div>
 
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="notes">Información Adicional (Opcional):</label>
             <textarea id="notes" name="notes" value={formData.notes} onChange={handleInputChange} disabled={isSubmitting} />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles['form-row']}>
+            <div className={styles['form-group']}>
               <label htmlFor="preferredDate">Fecha Preferida:</label>
               <input
                 type="date"
@@ -243,9 +243,9 @@ export default function CheckoutView() {
                 min={minDate}
                 max={maxDate}
               />
-              {dateError && <p className="error">{dateError}</p>}
+              {dateError && <p className={styles.error}>{dateError}</p>}
             </div>
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="preferredTime">Hora Preferida:</label>
               <TimePicker
                 selectedDate={formData.preferredDate}
@@ -257,17 +257,17 @@ export default function CheckoutView() {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={isSubmitting || itemsToCheckout.length === 0}>
+          <button type="submit" className={`${styles.btn} ${styles['btn-primary']}`} disabled={isSubmitting || itemsToCheckout.length === 0}>
             {isSubmitting ? 'Procesando...' : `Agendar y Proceder al Pago ($${total.toLocaleString('es-CO')} COP)`}
           </button>
 
-          {error && !isSubmitting && <p className="error">{error}</p>}
+          {error && !isSubmitting && <p className={styles.error}>{error}</p>}
         </form>
 
-        <div className="checkout-summary">
+        <div className={styles['checkout-summary']}>
           <h2>Resumen del Pedido</h2>
           {groupedItems.map(item => (
-            <div key={item?.id} className="summary-item">
+            <div key={item?.id} className={styles['summary-item']}>
               {item?.imageFileName && (
                 <img
                   src={item.imageFileName}
