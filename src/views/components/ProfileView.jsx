@@ -1,5 +1,5 @@
 // src/views/components/ProfileView.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 import {
@@ -17,9 +17,9 @@ export default function ProfileView() {
   const [editingField, setEditingField] = useState(null);
   const [form, setForm] = useState({ nombre: '', apellido: '', email: '', telefono: '', fechaNacimiento: '' });
   const [activeTab, setActiveTab] = useState('personal');
-  const [orderHistory, setOrderHistory] = useState([]);
+  const [setOrderHistory] = useState([]);
   const [favoriteServices, setFavoriteServices] = useState([]);
-  const [loadingHistory, setLoadingHistory] = useState(false);
+  const [setLoadingHistory] = useState(false);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
 
@@ -124,7 +124,7 @@ export default function ProfileView() {
       showNotification('👋 Sesión cerrada correctamente', 'success');
       navigate('/', { replace: true });
     } catch (error) {
-      showNotification('❌ Error al cerrar sesión', 'error');
+      showNotification('❌ Error al cerrar sesión', error.message || 'error');
     }
   };
 
@@ -142,15 +142,6 @@ export default function ProfileView() {
     );
   };
 
-  const formatDate = (timestamp) => {
-    if (!timestamp) return 'N/A';
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleDateString('es-CO', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('es-CO', {
@@ -302,17 +293,17 @@ export default function ProfileView() {
         )}
 
         {activeTab === 'configuracion' && (
-          <div className="account-settings">
+          <div className={styles["account-settings"]}>
             <h2>Configuración de Cuenta</h2>
             
 
 
-            <div className="settings-section danger-zone">
-              <div className="danger-actions">
-                <button className="logout-btn" onClick={handleLogout}>
+            <div className={styles["settings-section danger-zone"]}>
+              <div className={styles["danger-actions"]}>
+                <button className={styles["logout-btn"]} onClick={handleLogout}>
                   🚪 Cerrar Sesión
                 </button>
-                <button className="delete-btn" onClick={handleDelete}>
+                <button className={styles["delete-btn"]} onClick={handleDelete}>
                   🗑️ Eliminar Cuenta
                 </button>
               </div>

@@ -1,5 +1,5 @@
 // src/views/components/CartView.jsx
-import React, { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../firebase/firebaseConfig'; 
@@ -174,21 +174,21 @@ export default function CartView() {
             </div>
           </div>
 
-          <div className={styles["cart-summary"]}>
-            <div className={styles["summary-content"]}>
-              <div className={styles["summary-details"]}>
+          <div className={styles['cart-summary']}>
+            <div className={styles['summary-content']}>
+              <div className={styles['summary-details']}>
                 <h2>Resumen del pedido</h2>
-                <div className={styles["summary-line"]}>
+                <div className={styles['summary-line']}>
                   <span>Servicios ({itemCount})</span>
                   <span>${total.toLocaleString('es-CO')} COP</span>
                 </div>
-                <div className={styles["summary-line total-line"]}>
+                <div className={styles['summary-line total-line']}>
                   <span>Total</span>
-                  <span className={styles["total-amount"]}>${total.toLocaleString('es-CO')} COP</span>
+                  <span className={styles['total-amount']}>${total.toLocaleString('es-CO')} COP</span>
                 </div>
               </div>
               
-              <div className={styles["summary-actions"]}>
+              <div className={styles['summary-actions']}>
                 <button 
                   className={`${styles.btn} ${styles['btn-primaryC']} ${styles['checkout-btn']}`} 
                   onClick={handleCheckout}
