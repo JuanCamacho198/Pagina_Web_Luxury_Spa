@@ -1,5 +1,5 @@
 // src/views/AboutView.jsx
-import aboutStyles from './../styles/AboutView.module.css';
+import aboutStyles from '../../styles/AboutView.module.css'
 
 export default function AboutView() {
   return (

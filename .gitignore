@@ -13,6 +13,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
+github/copilot-instructions.md
 .vscode/*
 .env.local
 !.vscode/extensions.json

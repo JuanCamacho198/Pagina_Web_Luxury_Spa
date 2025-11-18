@@ -1,7 +1,7 @@
 // src/views/ContactView.jsx
 
-import Footer from '../views/components/Footer';
-import styles from '../styles/ContactView.module.css';
+import Footer from '../components/Footer';
+import styles from '../../styles/ContactView.module.css';
 
 export default function ContactView() {
   return (

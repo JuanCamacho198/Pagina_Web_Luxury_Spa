@@ -1,9 +1,9 @@
 // src/views/HomeView.jsx
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from './components/Footer';
-import { fetchServices } from '../models/servicesModel';
-import styles from '../styles/HomeView.module.css';
+import Footer from '../components/Footer';
+import { fetchServices } from '../../models/servicesModel';
+import styles from '../../styles/HomeView.module.css';
 
 //inicio
 function HomeView() {

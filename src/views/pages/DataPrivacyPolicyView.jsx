@@ -1,7 +1,7 @@
 // src/views/DataPrivacyPolicyView.jsx
 
-import Footer from './components/Footer';
-import styles from '../styles/PolicyView.module.css';
+import Footer from '../components/Footer';
+import styles from '../../styles/PolicyView.module.css';
 
 export default function DataPrivacyPolicyView() {
   return (

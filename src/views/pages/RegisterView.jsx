@@ -1,8 +1,8 @@
 // src/views/RegisterView.jsx
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { registroUsuario } from '../controllers/authController';
-import styles from '../styles/RegisterView.module.css';
+import { registroUsuario } from '../../controllers/authController';
+import styles from '../../styles/RegisterView.module.css';
 
 const RegisterView = () => {
   const [nombre, setNombre] = useState('');

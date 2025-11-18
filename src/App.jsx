@@ -13,25 +13,25 @@ import ProfileView              from './views/components/ProfileView';
 import ServiceDetailView from './views/components/ServiceDetailView'; 
 
 // Vistas principales
-import PublicHomeView           from './views/PublicHomeView';
-import LoginView                from './views/LoginView';
-import RegisterView             from './views/RegisterView';
-import HomeView                 from './views/HomeView';
+import PublicHomeView from './views/pages/PublicHomeView';
+import LoginView                from './views/pages/LoginView';
+import RegisterView             from './views/pages/RegisterView';
+import HomeView                 from './views/pages/HomeView';
 
-import PoliticasCancelacionView from './views/CancellationPolicyView';
-import DataPrivacyPolicyView from './views/DataPrivacyPolicyView';
-import ImportantReservationInfoView from './views/ImportantReservationInfoView';
-import FaqView from './views/FaqView';
+import PoliticasCancelacionView from './views/pages/CancellationPolicyView';
+import DataPrivacyPolicyView from './views/pages/DataPrivacyPolicyView';
+import ImportantReservationInfoView from './views/pages/ImportantReservationInfoView';
+import FaqView from './views/pages/FaqView';
 
-import ServicesView from './views/ServicesView';
+import ServicesView from './views/pages/ServicesView';
 import CheckoutView from './views/components/CheckoutView';
-import CitasView from './views/CitasView';
-import PaymentView from './views/PaymentView';
+import CitasView from './views/pages/CitasView';
+import PaymentView from './views/pages/PaymentView';
 import SuccessView from './views/components/SuccessView';
 import CartView from './views/components/CartView';
 
-import ContactView from './views/ContactView';
-import AboutView from './views/AboutView';
+import ContactView from './views/pages/ContactView';
+import AboutView from './views/pages/AboutView';
 
 // --- Importa los controladores ---
 import { loginUsuario, registroUsuario } from './controllers/authController';

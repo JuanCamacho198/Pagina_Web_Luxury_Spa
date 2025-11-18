@@ -1,7 +1,7 @@
 // src/views/LoginView.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../styles/LoginView.module.css';
+import styles from '../../styles/LoginView.module.css';
 
 const LoginView = ({ onLogin, error }) => {
   const [email, setEmail] = useState('');

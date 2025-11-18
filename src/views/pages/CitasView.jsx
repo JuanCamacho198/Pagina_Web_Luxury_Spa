@@ -4,8 +4,8 @@ import { getAuth } from 'firebase/auth';
 import {
   fetchAppointments,
   deleteAppointment
-} from '../models/citasModel';
-import styles from '../styles/CitasView.module.css';
+} from '../../models/citasModel';
+import styles from '../../styles/CitasView.module.css';
 
 export default function CitasView() {
   const [citas, setCitas] = useState([]);

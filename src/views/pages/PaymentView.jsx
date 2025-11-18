@@ -1,14 +1,14 @@
 // src/views/PaymentView.jsx
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from '../styles/PaymentView.module.css';
-import PaymentSuccessModal from '../views/components/PaymentSuccessModal'; // Importa el modal
+import styles from '../../styles/PaymentView.module.css';
+import PaymentSuccessModal from '../components/PaymentSuccessModal'; // Importa el modal
 
 // --- IMPORTAR IMÁGENES DESDE ASSETS ---
-import creditCardImage from '../assets/epayco-pagos.png';
-import pseImage from '../assets/PSE.png';
-import Nequi from '../assets/Nequi.png'
-import bancolombia from '../assets/bancolombia.png'
+import creditCardImage from '../../assets/epayco-pagos.png';
+import pseImage from '../../assets/PSE.png';
+import Nequi from '../../assets/Nequi.png'
+import bancolombia from '../../assets/bancolombia.png'
 // import nequiImage from '../assets/nequi.png';
 // import bancolombiaAppImage from '../assets/bancolombia_app.png';
 

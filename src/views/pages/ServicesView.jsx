@@ -1,9 +1,9 @@
 // src/views/ServicesView.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllServices } from '../controllers/servicesController';
-import Footer from './components/Footer';
-import styles from '../styles/ServicesView.module.css';
+import { getAllServices } from '../../controllers/servicesController';
+import Footer from '../components/Footer';
+import styles from '../../styles/ServicesView.module.css';
 
 export default function ServicesView() {
   const [services, setServices] = useState([]);
